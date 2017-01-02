@@ -141,6 +141,12 @@ Cette machine d’état de type 1 parmi M contrôle les deux compteurs et le shi
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Conception Max 3 pages}
 Précisez les entrées et sorties de votre machine d’état
+Cette machine d'état prend en entrée le compteur 4 bits, le compteur 8 bits et le bit envoyé par l'émetteur. Les bascules bistables sont de type S-R car il fallait qu'elle ne change pas d'état après être passée à 1 au flanc montant. Cette machine d'état va renvoyer un 1 si un '0' à été transmis comme signal de départ et si 8 coups d'horloges n'ont pas encore été atteints.
+La première bascule prend en entrée l'inverse du bit envoyé par l'émetteur (de façon à ce que l'horloge passe à 1 lorsuqe le bit envoyé ets un 0) et, en horloge, le compteur 4 bits (puisque les bits de l'émetteur doivent être reçus chaque 4 coups d'horloge). Ainsi, à chaque 4 coups d'horloge, l'horloge de la première bascule va passer à 1, et si l'entrée de S de la bascule est à 1 (et donc le bit envoyé par l'émetteur à 0), l'état de la bascule va passer à 1 et y rester. Ainsi, on sait que le bit qui signale le départ à été envoyé.
+La deuxième bascule prend en entrée le compteur 8 bits, et en horloge le compteur 4 bits. Ainsi, chaque 4 coups d'horloge, la bascule va "contrôler" que l'on n'ait pas atteint la fin du mot. Si l'entrée est à 1 lorsque le compteur 8 bit annonce la fin du mot, la bascule change d'état et y reste.
+Au bout du circuit, une porte XOR permet de savoir si les deux bascules ne sont pas au même état.
+Ainsi, au départ, la sortie est à 0. Dès qu'un 0 est transmis par l'émetteur, la première bascule passe à 1, et la sortie sera à 1 également. Puis, dès qu'on atteint les 8 coups de clock, la deuxième bascule passe à 1 aussi, et la sortie passe donc définitivement à 0.
+
 Insérez un graphe des états et une table des états. Donnez des explications sur le fonctionnement de votre machine. Quel est son Type ?
 Donnez les équations des états futurs et insérez une capture d’écran de la réalisation de votre machine.
 Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
@@ -148,7 +154,7 @@ Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge
 \end{tcolorbox}
 \section {Intégration et simulation}
 \subsection{Intégration}
-Suivant votre partie à concevoir, vous devez réalisé l’UART en interconnectant les différents blocs. 
+Suivant votre partie à concevoir, vous devez réaliser l’UART en interconnectant les différents blocs. 
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Réalisation et simulation Logisim - Max 1 page}
 Insérez une capture d’écran de l’UART complet sous Logisim
