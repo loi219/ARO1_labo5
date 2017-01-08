@@ -88,11 +88,24 @@ De plus, l’état de repos de la ligne est fixé à 1.
 
 %début d'un encadré avec la couleur définie plus haut
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
-\paragraph %démarre un paragraphe
-{Spécification - Max 1/2 page } 
-Indiquez si vous réalisez la partie émetteur ou la partie récepteur de l’UART
-Placez ici les spécifications de votre circuit en décrivant son fonctionnement. Votre circuit devra être conforme à ces spécifications.
+Nous réalisons la partie récepteur. Le circuit se compose d'un shift register, d'un compteur, un registre de sortie et un machine à états pour le contrôle.\\
+Le début de la communication démarre lorsque que le contrôle reçoit un $0$.
 
+\begin{itemize}
+    \item    Après un reset, le registre de sortie contient la valeur $0$
+    \item    Détection du front descendant sur l'entrée série provoqué par le \textbf{start bit} de l'émetteur
+        \begin{itemize}
+            \item    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=.8\textwidth]{src/chrono_emetteur.jpg}
+                        \captionof{figure}{Chronogramme émetteur}
+                     \label{fig:trame}
+                \end{figure}
+        \end{itemize}
+    \item    Chargement des bits tous les 4 cycles d'horloge après le front descendant du \textbf{start bit}
+    \item    Quand la tranmission est finie, la trame est chargée dans le registre de sortie
+    
+\end{itemize}   
 %fin de l'encadré
 \end{tcolorbox}
 

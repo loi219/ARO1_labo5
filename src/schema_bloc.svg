@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="18cm" height="14cm" viewBox="44 27 349 265" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="45.25" y="65" width="61" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="45.25" y="65" width="61" height="38"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="75.75" y="87.9">
+      <tspan x="75.75" y="87.9">CPT_3</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="46.1" y="124.7" width="61" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="46.1" y="124.7" width="61" height="38"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="76.6" y="147.6">
+      <tspan x="76.6" y="147.6">CPT_7</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="179.475" y="90.2" width="74.25" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="179.475" y="90.2" width="74.25" height="38"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="216.6" y="113.1">
+      <tspan x="216.6" y="113.1">STAMAC</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="299.25" y="89.2" width="52.7" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="299.25" y="89.2" width="52.7" height="38"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="325.6" y="112.1">
+      <tspan x="325.6" y="112.1">REGI</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="182.2" y="176.7" width="70.5" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="182.2" y="176.7" width="70.5" height="38"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="217.45" y="199.6">
+      <tspan x="217.45" y="199.6">SHREGI</tspan>
+    </text>
+  </g>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="75.75,65 75.75,44 325.6,44 325.6,83.9639 "/>
+    <polygon style="fill: #000000" points="325.6,86.9639 323.6,82.9639 325.6,83.9639 327.6,82.9639 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="325.6,86.9639 323.6,82.9639 325.6,83.9639 327.6,82.9639 "/>
+  </g>
+  <text font-size="11.2887" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="52.25" y="42">
+    <tspan x="52.25" y="42">CPT==3</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="253.725" y1="109.2" x2="293.016" y2="108.653"/>
+    <polygon style="fill: #000000" points="296.016,108.612 292.044,110.667 293.016,108.653 291.989,106.667 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="296.016,108.612 292.044,110.667 293.016,108.653 291.989,106.667 "/>
+  </g>
+  <text font-size="11.2889" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="270.1" y="103.2">
+    <tspan x="270.1" y="103.2">4</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="216.6" y1="128.2" x2="217.358" y2="171.465"/>
+    <polygon style="fill: #000000" points="217.411,174.464 215.341,170.5 217.358,171.465 219.34,170.43 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="217.411,174.464 215.341,170.5 217.358,171.465 219.34,170.43 "/>
+  </g>
+  <text font-size="11.2889" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="220.1" y="148.7">
+    <tspan x="220.1" y="148.7">8</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="106.25" y1="84" x2="173.367" y2="99.3272"/>
+    <polygon style="fill: #000000" points="176.292,99.9951 171.947,101.054 173.367,99.3272 172.838,97.1547 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="176.292,99.9951 171.947,101.054 173.367,99.3272 172.838,97.1547 "/>
+  </g>
+  <text font-size="11.2889" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="133.25" y="90">
+    <tspan x="133.25" y="90">4</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="107.1" y1="124.7" x2="173.287" y2="115.331"/>
+    <polygon style="fill: #000000" points="176.257,114.911 172.577,117.451 173.287,115.331 172.017,113.491 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="176.257,114.911 172.577,117.451 173.287,115.331 172.017,113.491 "/>
+  </g>
+  <text font-size="11.2889" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="128.1" y="134.1">
+    <tspan x="128.1" y="134.1">8</tspan>
+  </text>
+  <text font-size="11.2887" style="fill: #00c3c3;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="181.1" y="37.7">
+    <tspan x="181.1" y="37.7">PUSH DATA</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="107.1" y1="153.2" x2="174.526" y2="129.91"/>
+    <polygon style="fill: #000000" points="177.361,128.93 174.234,132.126 174.526,129.91 172.928,128.346 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="177.361,128.93 174.234,132.126 174.526,129.91 172.928,128.346 "/>
+  </g>
+  <text font-size="11.2887" style="fill: #00c3c3;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="116.1" y="172.2">
+    <tspan x="116.1" y="172.2">STOP</tspan>
+  </text>
+  <text font-size="11.2887" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="117.1" y="159.2">
+    <tspan x="117.1" y="159.2">CPT==7</tspan>
+  </text>
+  <g>
+    <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="325.6,127.2 325.6,195.7 257.936,195.7 "/>
+    <polygon style="fill: #000000" points="254.936,195.7 258.936,193.7 257.936,195.7 258.936,197.7 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="254.936,195.7 258.936,193.7 257.936,195.7 258.936,197.7 "/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="327.25" y="164.5">
+    <tspan x="327.25" y="164.5"></tspan>
+  </text>
+  <text font-size="11.2887" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="334.25" y="154.2">
+    <tspan x="334.25" y="154.2"></tspan>
+  </text>
+  <text font-size="11.2887" style="fill: #00c3c3;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="329.6" y="162.4">
+    <tspan x="329.6" y="162.4">PUSH DATA</tspan>
+  </text>
+  <text font-size="11.2889" style="fill: #0000ff;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="224.725" y="233.95">
+    <tspan x="224.725" y="233.95">8</tspan>
+  </text>
+  <g>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="214.375" y="288.25">
+      <tspan x="214.375" y="288.25">Q</tspan>
+    </text>
+    <g>
+      <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="218.375" y1="217.25" x2="218.829" y2="268.514"/>
+      <polygon style="fill: #000000" points="218.855,271.514 216.82,267.532 218.829,268.514 220.82,267.496 "/>
+      <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="218.855,271.514 216.82,267.532 218.829,268.514 220.82,267.496 "/>
+    </g>
+  </g>
+  <text font-size="11.2887" style="fill: #00c3c3;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="222.225" y="249.45">
+    <tspan x="222.225" y="249.45">SHIFT DATA</tspan>
+  </text>
+</svg>
