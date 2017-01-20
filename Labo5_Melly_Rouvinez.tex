@@ -135,10 +135,35 @@ Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge
 Le premier compteur demandé compte de 0 à 3. Ce compteur comprend une entrée de remise à 0 synchrone et une sortie indiquant que le compteur a atteint sa valeur maximum.
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Conception et tests - Max 1 page }
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.8\textwidth]{src/COUNT_4BITS.png}
+    \captionof{figure}{Compteur 0\-3}
+    \label{fig:count4bits}
+\end{figure}
 Insérez une capture d’écran pour présenter votre bloc compteur 0-3. Expliquez sa réalisation et son fonctionnement.
 Indiquez comment vous avez testé les différents modes de fonctionnement afin de le valider. Vous pouvez ajouter un chronogramme.
 Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
-\\
+
+
+Ce bloc est composé d'un bloc de base (voir \ref{fig:countBase}) qui s'occupe uniqument de changer d'étât une bascule D, ce qui aura comme effet de compter lorsque qu'il est connecté avec d'autres de ces blocs.\\
+\paragraph{Définition des entrées}
+\begin{itemize}
+
+    \item     \textbf{A} active le compteur
+    \item     \textbf{CLK} permet de connecter l'horloge du circuit "maître"
+    \item     \textbf{CLR} permet une remise à zéro du compteur
+
+\end{itemize}
+
+\paragraph{Définition des sorties}
+\begin{itemize}
+
+    \item     \textbf{MAX} s'active lorsque que le compteur à atteint sa valeur maximum, c'est-à-dire 3.
+    \item     \textbf{D} affiche l'état du compteur
+\end{itemize}
+
+
 \end{tcolorbox}
 \subsection{Le bloc compteur 0-7}
 Le deuxième compteur demandé compte de 0 à 7. Ce compteur comprend une entrée de remise à 0 synchrone, une entrée enable pour l’activer et une sortie indiquant que le compteur a atteint sa valeur maximum.
@@ -209,5 +234,16 @@ Evitez les banalités et les lieux communs
 ETCAETERA…
 \\
 \end{tcolorbox}
+
+\section{Annexe}
+
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.8\textwidth]{src/COUNT_BASE.png}
+    \captionof{figure}{Circuit de base des compteurs}
+    \label{fig:countBase}
+    \end{figure}
+
 
 \end{document}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project integrity="d4f9a765fc6e8b96a760bb16f666b22c10c07d03" source="2.13.20.t" version="1.0">
+<project integrity="d79d685ded1b7b9ac05fa9c15ed7255a5f5dd8fe" source="2.13.20.t" version="1.0">
 This file is intended to be loaded by Logisim-evolution (https://github.com/reds-heig/logisim-evolution).
 <lib desc="#Wiring" name="0">
     <tool name="Splitter">
@@ -211,13 +211,13 @@ end TCL_Generic;
       <a name="uuid" val="6ced7f2b-1e9e-475b-a5c0-39ef0701a9ef"/>
       <a name="integrity" val="ca55e9549b1fde8423cecec8b2fdf7ca120f6d96"/>
     </comp>
-    <comp lib="0" loc="(180,340)" name="Clock">
+    <comp lib="0" loc="(180,340)" name="Pin">
       <a name="label" val="CLK"/>
       <a name="owner" val="sven_rouvinez"/>
-      <a name="date" val="17.01.17 15:59:49"/>
+      <a name="date" val="15.12.16 15:54:19"/>
       <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="ba7542ed-2394-4721-8d82-c2b790a564ed"/>
-      <a name="integrity" val="f82d8a1c2c0c0c4f0f2df73cb3b298777a5d9ab3"/>
+      <a name="uuid" val="beab82c4-4f19-453f-b7eb-e81d8dc78ad5"/>
+      <a name="integrity" val="9df12e660b06a49c719fd54d7f8866c3ca99da93"/>
     </comp>
     <comp lib="0" loc="(700,130)" name="Pin">
       <a name="facing" val="west"/>
@@ -322,6 +322,14 @@ end TCL_Generic;
     <wire from="(210,220)" to="(220,220)"/>
     <wire from="(450,240)" to="(720,240)"/>
     <wire from="(750,30)" to="(760,30)"/>
+    <comp lib="0" loc="(220,370)" name="Pin">
+      <a name="label" val="CLK"/>
+      <a name="owner" val="sven_rouvinez"/>
+      <a name="date" val="03.12.16 17:46:05"/>
+      <a name="version" val="2.13.20.t"/>
+      <a name="uuid" val="fa70ab81-e69f-4422-9bb8-5ed9cae43f0c"/>
+      <a name="integrity" val="7c654ea0b54c183b7fde3e4966e9433902a1a0ae"/>
+    </comp>
     <comp lib="2" loc="(720,30)" name="BitSelector">
       <a name="facing" val="west"/>
       <a name="width" val="4"/>
@@ -357,9 +365,7 @@ end TCL_Generic;
       <a name="uuid" val="4aeaef74-88a7-4db4-9d10-df3bf7206d25"/>
       <a name="integrity" val="55807878eaae0d23cbfb4b0ee35484b8f443ab5b"/>
     </comp>
-    <comp loc="(590,90)" name="SHREGI_4BITS">
-      <a name="label" val="SHREGI_4BITS_1"/>
-    </comp>
+    <comp loc="(590,90)" name="SHREGI_4BITS"/>
     <comp lib="0" loc="(220,220)" name="Splitter">
       <a name="incoming" val="8"/>
       <a name="owner" val="sven_rouvinez"/>
@@ -425,17 +431,7 @@ end TCL_Generic;
       <a name="uuid" val="e9df2016-d7ec-4e41-9d11-dbdd1e1d82d0"/>
       <a name="integrity" val="dafe39314e6f931c9e92c1d5ddbac6cbc4f26104"/>
     </comp>
-    <comp lib="0" loc="(220,370)" name="Clock">
-      <a name="label" val="CLK"/>
-      <a name="owner" val="sven_rouvinez"/>
-      <a name="date" val="17.01.17 15:59:49"/>
-      <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="ff36eade-f965-49ca-81a0-b35de6948966"/>
-      <a name="integrity" val="c08e3d2ae92b12a2ac0cf2c56ab1c8a1bde6f148"/>
-    </comp>
-    <comp loc="(590,290)" name="SHREGI_4BITS">
-      <a name="label" val="SHREGI_4BITS_2"/>
-    </comp>
+    <comp loc="(590,290)" name="SHREGI_4BITS"/>
     <comp lib="0" loc="(730,270)" name="Constant">
       <a name="facing" val="north"/>
       <a name="width" val="2"/>
@@ -561,14 +557,6 @@ end TCL_Generic;
       <a name="uuid" val="f2d97c38-5e4f-4809-9c74-54d59dd9139a"/>
       <a name="integrity" val="d7de8c22e71e83510a0ba196630693d1bf3ea10f"/>
     </comp>
-    <comp lib="0" loc="(80,480)" name="Clock">
-      <a name="label" val="CLK"/>
-      <a name="owner" val="sven_rouvinez"/>
-      <a name="date" val="17.01.17 15:59:49"/>
-      <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="ff36eade-f965-49ca-81a0-b35de6948966"/>
-      <a name="integrity" val="c08e3d2ae92b12a2ac0cf2c56ab1c8a1bde6f148"/>
-    </comp>
     <comp lib="0" loc="(550,630)" name="Splitter">
       <a name="facing" val="north"/>
       <a name="fanout" val="4"/>
@@ -684,6 +672,14 @@ end TCL_Generic;
       <a name="uuid" val="ad75da44-6d69-4e42-94c5-ec67701ec315"/>
       <a name="integrity" val="586c3c7cfde4a5c81c28a334a90016efe7238bf9"/>
     </comp>
+    <comp lib="0" loc="(80,480)" name="Pin">
+      <a name="label" val="CLK"/>
+      <a name="owner" val="johanna_melly"/>
+      <a name="date" val="05.12.16 16:14:25"/>
+      <a name="version" val="2.13.20.t"/>
+      <a name="uuid" val="a35cbe5a-ad40-4449-af2a-fc87a06ec280"/>
+      <a name="integrity" val="d24be329f087eed646b3c208c0592bcd270b51fd"/>
+    </comp>
     <comp lib="0" loc="(590,630)" name="Pin">
       <a name="facing" val="west"/>
       <a name="output" val="true"/>
@@ -739,14 +735,19 @@ end TCL_Generic;
     <wire from="(430,310)" to="(430,340)"/>
     <wire from="(850,390)" to="(870,390)"/>
     <wire from="(760,220)" to="(760,260)"/>
+    <wire from="(290,360)" to="(450,360)"/>
+    <wire from="(290,240)" to="(450,240)"/>
     <wire from="(770,260)" to="(770,370)"/>
     <wire from="(770,260)" to="(790,260)"/>
+    <wire from="(270,400)" to="(290,400)"/>
     <wire from="(770,370)" to="(800,370)"/>
     <wire from="(430,340)" to="(450,340)"/>
+    <wire from="(290,360)" to="(290,400)"/>
     <wire from="(810,250)" to="(840,250)"/>
     <wire from="(560,220)" to="(760,220)"/>
     <wire from="(430,310)" to="(560,310)"/>
     <wire from="(560,340)" to="(700,340)"/>
+    <wire from="(290,240)" to="(290,360)"/>
     <wire from="(760,260)" to="(770,260)"/>
     <comp lib="0" loc="(810,250)" name="Splitter">
       <a name="facing" val="west"/>
@@ -763,9 +764,15 @@ end TCL_Generic;
       <a name="uuid" val="8081c91a-f391-4d54-bc5d-551d598f316c"/>
       <a name="integrity" val="366ebf9010123fd16ed3576731abdd8ea451b61f"/>
     </comp>
-    <comp loc="(560,220)" name="COUNT_BASE">
-      <a name="label" val="COUNT_BASE_1"/>
+    <comp lib="0" loc="(270,400)" name="Pin">
+      <a name="label" val="CLK"/>
+      <a name="owner" val="johanna_melly"/>
+      <a name="date" val="20.12.16 15:33:37"/>
+      <a name="version" val="2.13.20.t"/>
+      <a name="uuid" val="3aa7936e-b6dd-481e-af23-6a32342a38dd"/>
+      <a name="integrity" val="454a379d0e5ab4aa8f31b272d934f1238314a7e2"/>
     </comp>
+    <comp loc="(560,220)" name="COUNT_BASE"/>
     <comp lib="0" loc="(840,250)" name="Pin">
       <a name="facing" val="west"/>
       <a name="output" val="true"/>
@@ -797,9 +804,7 @@ end TCL_Generic;
       <a name="uuid" val="b236ec97-ddf1-4f40-80fb-19162e97c870"/>
       <a name="integrity" val="f498f3e2e81ccef035c4e8acf5532d78f6f1c660"/>
     </comp>
-    <comp loc="(560,340)" name="COUNT_BASE">
-      <a name="label" val="COUNT_BASE_2"/>
-    </comp>
+    <comp loc="(560,340)" name="COUNT_BASE"/>
     <comp lib="7" loc="(4,50)" name="Text" trackercomp="true">
       <a name="text" val="Attention, votre version de Logisim"/>
       <a name="font" val="SansSerif plain 48"/>
@@ -835,7 +840,11 @@ end TCL_Generic;
     <a name="circuitvhdlpath" val=""/>
     <wire from="(770,360)" to="(770,370)"/>
     <wire from="(750,150)" to="(750,350)"/>
+    <wire from="(190,280)" to="(250,280)"/>
+    <wire from="(250,170)" to="(370,170)"/>
+    <wire from="(250,280)" to="(370,280)"/>
     <wire from="(550,260)" to="(610,260)"/>
+    <wire from="(250,390)" to="(370,390)"/>
     <wire from="(360,230)" to="(480,230)"/>
     <wire from="(360,340)" to="(480,340)"/>
     <wire from="(630,240)" to="(690,240)"/>
@@ -855,6 +864,8 @@ end TCL_Generic;
     <wire from="(550,360)" to="(770,360)"/>
     <wire from="(600,270)" to="(600,370)"/>
     <wire from="(600,150)" to="(600,250)"/>
+    <wire from="(250,170)" to="(250,280)"/>
+    <wire from="(250,280)" to="(250,390)"/>
     <wire from="(360,260)" to="(370,260)"/>
     <wire from="(360,370)" to="(370,370)"/>
     <wire from="(480,170)" to="(480,230)"/>
@@ -862,9 +873,7 @@ end TCL_Generic;
     <wire from="(480,260)" to="(550,260)"/>
     <wire from="(600,250)" to="(610,250)"/>
     <wire from="(600,270)" to="(610,270)"/>
-    <comp loc="(480,150)" name="COUNT_BASE">
-      <a name="label" val="COUNT_BASE_1"/>
-    </comp>
+    <comp loc="(480,150)" name="COUNT_BASE"/>
     <comp lib="0" loc="(190,150)" name="Pin">
       <a name="label" val="A"/>
       <a name="owner" val="johanna_melly"/>
@@ -873,8 +882,14 @@ end TCL_Generic;
       <a name="uuid" val="4aa529e9-8e33-42ca-926f-0470b5eb8238"/>
       <a name="integrity" val="689f46089bededfcd4bcf11e8a986411e0b02b92"/>
     </comp>
-    <comp loc="(480,370)" name="COUNT_BASE">
-      <a name="label" val="COUNT_BASE_3"/>
+    <comp loc="(480,370)" name="COUNT_BASE"/>
+    <comp lib="0" loc="(190,280)" name="Pin">
+      <a name="label" val="CLK"/>
+      <a name="owner" val="johanna_melly"/>
+      <a name="date" val="20.12.16 15:46:07"/>
+      <a name="version" val="2.13.20.t"/>
+      <a name="uuid" val="ab3d895e-554d-4d43-afe8-e59ae8d19170"/>
+      <a name="integrity" val="7060fa1c673fdc025fdbdb5670ec229b391b98d2"/>
     </comp>
     <comp lib="0" loc="(880,370)" name="Pin">
       <a name="facing" val="west"/>
@@ -917,9 +932,7 @@ end TCL_Generic;
       <a name="uuid" val="797a1f7a-f755-4dd3-83de-faa1cd8d890e"/>
       <a name="integrity" val="6ea141a4defa9a4d438229bf0959441186b6c505"/>
     </comp>
-    <comp loc="(480,260)" name="COUNT_BASE">
-      <a name="label" val="COUNT_BASE_2"/>
-    </comp>
+    <comp loc="(480,260)" name="COUNT_BASE"/>
     <comp lib="7" loc="(4,50)" name="Text" trackercomp="true">
       <a name="text" val="Attention, votre version de Logisim"/>
       <a name="font" val="SansSerif plain 48"/>
@@ -1133,13 +1146,13 @@ end TCL_Generic;
       <a name="uuid" val="fc529119-29c1-4461-aa72-f486fdc10b30"/>
       <a name="integrity" val="9c09451117aa5319908e5bf0785b2e2bcfdf46a2"/>
     </comp>
-    <comp lib="0" loc="(250,380)" name="Clock">
+    <comp lib="0" loc="(250,380)" name="Pin">
       <a name="label" val="CLK"/>
-      <a name="owner" val="sven_rouvinez"/>
-      <a name="date" val="17.01.17 15:59:49"/>
+      <a name="owner" val="johanna_melly"/>
+      <a name="date" val="29.12.16 18:59:10"/>
       <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="ff36eade-f965-49ca-81a0-b35de6948966"/>
-      <a name="integrity" val="c08e3d2ae92b12a2ac0cf2c56ab1c8a1bde6f148"/>
+      <a name="uuid" val="4eed9358-2d7d-4cba-8f94-e8d7e7562ad6"/>
+      <a name="integrity" val="7e17042d292ae910ee85d7413aad7a252a081656"/>
     </comp>
     <comp lib="4" loc="(390,200)" name="D Flip-Flop">
       <a name="owner" val="johanna_melly"/>
@@ -1490,14 +1503,6 @@ end TCL_Generic;
     <comp lib="0" loc="(240,190)" name="Constant">
       <a name="value" val="0x0"/>
     </comp>
-    <comp lib="0" loc="(160,240)" name="Clock">
-      <a name="label" val="CLK"/>
-      <a name="owner" val="sven_rouvinez"/>
-      <a name="date" val="17.01.17 15:59:49"/>
-      <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="ff36eade-f965-49ca-81a0-b35de6948966"/>
-      <a name="integrity" val="c08e3d2ae92b12a2ac0cf2c56ab1c8a1bde6f148"/>
-    </comp>
     <comp lib="0" loc="(160,300)" name="Pin">
       <a name="label" val="COUNT_8BIT_MAX"/>
       <a name="owner" val="johanna_melly"/>
@@ -1538,6 +1543,14 @@ end TCL_Generic;
       <a name="uuid" val="b7d6ba34-37ca-46e0-8b0b-d416aadc1250"/>
       <a name="integrity" val="54c087277f4fe69cd58a0316f27647a6ed8345bd"/>
     </comp>
+    <comp lib="0" loc="(160,240)" name="Pin">
+      <a name="label" val="COUNT_4BIT_MAX"/>
+      <a name="owner" val="johanna_melly"/>
+      <a name="date" val="02.01.17 15:01:05"/>
+      <a name="version" val="2.13.20.t"/>
+      <a name="uuid" val="e4af7ed9-195f-474f-b501-a500b528664a"/>
+      <a name="integrity" val="8f8550ef6030a7bb1b3ca64905ab679d2977d874"/>
+    </comp>
     <comp lib="7" loc="(4,50)" name="Text" trackercomp="true">
       <a name="text" val="Attention, votre version de Logisim"/>
       <a name="font" val="SansSerif plain 48"/>
@@ -1571,43 +1584,38 @@ end TCL_Generic;
     <a name="clabelfont" val="SansSerif bold 12"/>
     <a name="circuitnamedbox" val="true"/>
     <a name="circuitvhdlpath" val=""/>
+    <wire from="(350,300)" to="(410,300)"/>
     <wire from="(580,380)" to="(890,380)"/>
     <wire from="(800,270)" to="(800,280)"/>
+    <wire from="(410,300)" to="(590,300)"/>
     <wire from="(570,250)" to="(570,320)"/>
     <wire from="(760,190)" to="(760,280)"/>
     <wire from="(760,280)" to="(800,280)"/>
     <wire from="(170,360)" to="(170,380)"/>
-    <wire from="(580,280)" to="(580,300)"/>
-    <wire from="(580,300)" to="(580,320)"/>
+    <wire from="(310,300)" to="(350,300)"/>
     <wire from="(860,260)" to="(860,340)"/>
+    <wire from="(90,300)" to="(190,300)"/>
     <wire from="(170,360)" to="(200,360)"/>
     <wire from="(800,270)" to="(820,270)"/>
     <wire from="(840,260)" to="(860,260)"/>
     <wire from="(800,280)" to="(820,280)"/>
+    <wire from="(350,300)" to="(350,400)"/>
+    <wire from="(350,400)" to="(890,400)"/>
     <wire from="(550,250)" to="(570,250)"/>
     <wire from="(170,380)" to="(580,380)"/>
-    <wire from="(580,320)" to="(600,320)"/>
+    <wire from="(570,320)" to="(590,320)"/>
     <wire from="(420,190)" to="(760,190)"/>
+    <wire from="(410,250)" to="(430,250)"/>
+    <wire from="(580,280)" to="(580,380)"/>
+    <wire from="(420,190)" to="(420,230)"/>
     <wire from="(860,340)" to="(890,340)"/>
+    <wire from="(420,230)" to="(430,230)"/>
     <wire from="(90,360)" to="(170,360)"/>
     <wire from="(240,360)" to="(890,360)"/>
-    <wire from="(580,320)" to="(580,380)"/>
-    <wire from="(310,300)" to="(580,300)"/>
-    <wire from="(750,280)" to="(760,280)"/>
+    <wire from="(410,250)" to="(410,300)"/>
     <wire from="(580,280)" to="(590,280)"/>
-    <wire from="(580,300)" to="(590,300)"/>
-    <wire from="(570,320)" to="(580,320)"/>
-    <comp loc="(550,230)" name="COUNT_8BITS">
-      <a name="label" val="COUNT_8BITS_1"/>
-    </comp>
-    <comp lib="0" loc="(80,270)" name="Clock">
-      <a name="label" val="sysclk"/>
-      <a name="owner" val="sven_rouvinez"/>
-      <a name="date" val="17.01.17 15:59:49"/>
-      <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="ff36eade-f965-49ca-81a0-b35de6948966"/>
-      <a name="integrity" val="c08e3d2ae92b12a2ac0cf2c56ab1c8a1bde6f148"/>
-    </comp>
+    <wire from="(590,320)" to="(600,320)"/>
+    <comp loc="(550,230)" name="COUNT_8BITS"/>
     <comp lib="0" loc="(1020,320)" name="Pin">
       <a name="facing" val="west"/>
       <a name="output" val="true"/>
@@ -1629,12 +1637,8 @@ end TCL_Generic;
       <a name="uuid" val="a6756a5a-3423-4da6-96aa-15c885bf9850"/>
       <a name="integrity" val="64e00a116b611a5339184270eb89047711a036f9"/>
     </comp>
-    <comp loc="(1020,320)" name="SHREGI_8BITS">
-      <a name="label" val="SHREGI_8BITS_1"/>
-    </comp>
-    <comp loc="(310,280)" name="COUNT_4BITS">
-      <a name="label" val="COUNT_4BITS_1"/>
-    </comp>
+    <comp loc="(1020,320)" name="SHREGI_8BITS"/>
+    <comp loc="(310,280)" name="COUNT_4BITS"/>
     <comp lib="0" loc="(90,360)" name="Pin">
       <a name="label" val="A"/>
       <a name="owner" val="johanna_melly"/>
@@ -1643,10 +1647,15 @@ end TCL_Generic;
       <a name="uuid" val="f0839c69-415c-4d70-8c60-edff5df52cca"/>
       <a name="integrity" val="484da27d7fe979f77431beb258e7c067102845f9"/>
     </comp>
-    <comp lib="0" loc="(190,280)" name="Constant"/>
-    <comp loc="(750,280)" name="STAMAC">
-      <a name="label" val="STAMAC_1"/>
+    <comp lib="0" loc="(90,300)" name="Clock">
+      <a name="label" val="CLK"/>
+      <a name="owner" val="johanna_melly"/>
+      <a name="date" val="02.01.17 15:07:14"/>
+      <a name="version" val="2.13.20.t"/>
+      <a name="uuid" val="35eb221c-0c07-4cf0-8e79-de5ff7a483d0"/>
+      <a name="integrity" val="625289595a0c3fce2998f80984f5eb25579fc059"/>
     </comp>
+    <comp lib="0" loc="(190,280)" name="Constant"/>
     <comp lib="0" loc="(840,260)" name="Splitter">
       <a name="facing" val="west"/>
       <a name="owner" val="johanna_melly"/>
@@ -1658,6 +1667,7 @@ end TCL_Generic;
     <comp lib="0" loc="(890,320)" name="Constant">
       <a name="value" val="0x0"/>
     </comp>
+    <comp loc="(760,280)" name="STAMAC"/>
     <comp lib="7" loc="(4,50)" name="Text" trackercomp="true">
       <a name="text" val="Attention, votre version de Logisim"/>
       <a name="font" val="SansSerif plain 48"/>
