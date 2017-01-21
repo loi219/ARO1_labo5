@@ -88,7 +88,7 @@ De plus, l’état de repos de la ligne est fixé à 1.
 
 %début d'un encadré avec la couleur définie plus haut
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
-Nous réalisons la partie récepteur. Le circuit se compose d'un shift register, d'un compteur, un registre de sortie et un machine à états pour le contrôle.\\
+Nous réalisons la partie récepteur. Le circuit se compose d'un shift register, de deux compteurs, un registre de sortie et un machine à états pour le contrôle.\\
 Le début de la communication démarre lorsque que le contrôle reçoit un $0$.
 
 \begin{itemize}
@@ -178,12 +178,28 @@ Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge
 Cette machine d’état de type 1 parmi M contrôle les deux compteurs et le shift register. 
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Conception Max 3 pages}
+
 Précisez les entrées et sorties de votre machine d’état
+
+La machine d'état est composée de deux bascules, et prend en entrée:
+\begin{itemize}
+
+    \item     \textbf{LAST_BIT} reçoit le bit envoyé par l'émetteur
+    \item     \textbf{COUNT_8BITS_MAX} compte de 0 à 7
+    \item     \textbf{COUNT_4BITS_MAX} compte de 0 à 3
+    \item     \textbf{CLR} permet une remise à zéro du compteur
+    \item     \textbf{CLK} pin connecté à l'horloge principale
+\end{itemize}
+En sortie:
+\begin{itemize}
+    \item     \textbf{D} Permet de savoir où commence et se termnine la séquence de bits envoyée.
+\end{itemize}
 Cette machine d'état prend en entrée le compteur 4 bits, le compteur 8 bits et le bit envoyé par l'émetteur. Les bascules bistables sont de type S-R car il fallait qu'elle ne change pas d'état après être passée à 1 au flanc montant. Cette machine d'état va renvoyer un 1 si un '0' à été transmis comme signal de départ et si 8 coups d'horloges n'ont pas encore été atteints.
-La première bascule prend en entrée l'inverse du bit envoyé par l'émetteur (de façon à ce que l'horloge passe à 1 lorsuqe le bit envoyé ets un 0) et, en horloge, le compteur 4 bits (puisque les bits de l'émetteur doivent être reçus chaque 4 coups d'horloge). Ainsi, à chaque 4 coups d'horloge, l'horloge de la première bascule va passer à 1, et si l'entrée de S de la bascule est à 1 (et donc le bit envoyé par l'émetteur à 0), l'état de la bascule va passer à 1 et y rester. Ainsi, on sait que le bit qui signale le départ à été envoyé.
-La deuxième bascule prend en entrée le compteur 8 bits, et en horloge le compteur 4 bits. Ainsi, chaque 4 coups d'horloge, la bascule va "contrôler" que l'on n'ait pas atteint la fin du mot. Si l'entrée est à 1 lorsque le compteur 8 bit annonce la fin du mot, la bascule change d'état et y reste.
+La première bascule prend en entrée l'inverse du bit envoyé par l'émetteur (de façon à ce que l'horloge passe à 1 lorsuqe le bit envoyé est un 0). Ainsi, à chaque coup d'horloge, l'horloge de la première bascule va passer à 1, et si l'entrée de S de la bascule est à 1 (et donc le bit envoyé par l'émetteur à 0), l'état de la bascule va passer à 1 et y rester. Ainsi, on sait que le bit qui signale le départ à été envoyé.
+La deuxième bascule prend en entrée le compteur 8 bits. Ainsi, à chaque coup d'horloge, la bascule va "contrôler" que l'on n'ait pas atteint la fin du mot. Si l'entrée est à 1 lorsque le compteur 8 bit annonce la fin du mot, la bascule change d'état et y reste.
 Au bout du circuit, une porte XOR permet de savoir si les deux bascules ne sont pas au même état.
 Ainsi, au départ, la sortie est à 0. Dès qu'un 0 est transmis par l'émetteur, la première bascule passe à 1, et la sortie sera à 1 également. Puis, dès qu'on atteint les 8 coups de clock, la deuxième bascule passe à 1 aussi, et la sortie passe donc définitivement à 0.
+Enfin, un MUX tout à la fin enverra en sortie la constante 0 tant que le COUNT_4BIT_MAX est à 0, et enverra en sortie le résultat du XOX si COUNT_4BITS est à 1. Ainsi, on prend en compte l'état de la machine d'état chaque 4 coups d'horloge (puisque les bits émis par l'émetteurs son récupérés chaque 4 coups d'horloge).
 
 Insérez un graphe des états et une table des états. Donnez des explications sur le fonctionnement de votre machine. Quel est son Type ?
 Donnez les équations des états futurs et insérez une capture d’écran de la réalisation de votre machine.
@@ -197,7 +213,23 @@ Suivant votre partie à concevoir, vous devez réaliser l’UART en interconnect
 \paragraph{Réalisation et simulation Logisim - Max 1 page}
 Insérez une capture d’écran de l’UART complet sous Logisim
 Expliquez le fonctionnement global de l’UART
-Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
+L'UART est composé d'un compteur 4 bits (COUNT_4BITS_1), d'un compteur 8 bits (COUNT_8BITS_1), d'une machine d'état (STAMAC_1), d'un shift reister 8 bits (SHREGI_8BITS_1) ainsi qu'un register de sortie 8 bits (REGI_8BITS_1).
+Les différentes entrées de l'UART sont:
+\begin{itemize}
+    \item     \textbf{A} le bit envoyé par l'émetteur
+    \item     \textbf{CLR} permet une remise à zéro du compteur
+    \item     \textbf{sysclk} l'horloge principale, reliée à tous les circuits
+\end{itemize}
+En sortie:
+\begin{itemize}
+    \item     \textbf{Output_bus_1} Affiche la sortie du shift register
+    \item     \textbf{D} Affiche la sortie du register, donc la séquence de 8 bits transmise, après 8 X 4 coups d'horloge.
+\end{itemize}
+Le bit transmis A va tout d'abord être converti en un 8 bits sous cette forme: AAAAAAAA. Le but sera l'entrée D du shift register.
+La machine d'état va permettre d'activer ou non le shift register. Lorsqu'un premier 0 est transmis par l'émetteur (ce qui marque le début de la séquence à recevoir), la machine d'état va activer le shift register en lui passant le bit de sortie dans son entrée s. La sortie de la machine d'état va être prise en compte chaque 4 coups d'horloge, le reste du temps elle sera à 0. Ainsi, le shift register va être activé uniquement chaque 4 coups d'horloge (comme requis), et ce 8 fois (le temps de recevoir le mot en entier).
+Le compteur 4 bits prend nu 1 en entrée car il doit compter continuellement. Le compteur 8 bits, lui doit commencer à compter seulemement lorsqu'on doit recevoir les bits de l'émetteur, et doit considerer 4 coups d'horloge comme un seul. Il prend donc en entrée la sortie de la machine d'état, ce qui va permettre d'activer le compteur au bon moment, et seulement chaque 4 coups d'horloge.
+Le register de sortie a pour rôle de load les 8 bits dans une sortie lorsqu'ils ont été transmis. Il prend donc en entrée A la sortie du chift register, qui contiendra les bits reçus. En entrée S, il prend la sortie du compteur 8 bits, ainsi c'est seulement à la fin de la réception des 8 bits que les bits vont être loadés. Le reste du temps, le register sera sur hold.
+Ainsi, on a bien une réception de 8 bits loadés dans une sortie après 8 X 4 coups d'horloge après la signal donné par un bit à 0 transmis au début.
 \\
 \end{tcolorbox}
  \subsection{Simulation sous Logisim}
@@ -211,10 +243,21 @@ Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge
 \end{tcolorbox}
  \subsection{Synthèse et test de fonctionnement réel}
 Synthèse et configuration du matériel, test de fonctionnement.
-L’UART finalement synthétisé et chargé dans une carte, une carte émetteur sera reliée à une carte récepteur afin de tester une transmission de données.
+L’UART finalement synthétisé et chargé dans une carte, une carte émetteur sera reliée à une carte récepteur afin de tester une transmission de données. 
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Essais avec une carte - Max 1 page}
-Indiquez comment vous faites le test (et avec un groupe différent de la simulation). Quelles données choisissez-vous pour faire les essais ?Vous devez faire valider votre circuit en fonctionnement au professeur ou à l’assistant
+Pour l'essai avec la carte, nous avons pris une fréquence à 32Hz, et nous avons downloadé l'UART sur la carte. Nous avons précisé ces données:
+\begin{itemize}
+    \item     \textbf{A} les 8 bits transmis par l'émetteur
+    \item     \textbf{CLR} la remise à zéro du compteur
+    \item     \textbf{CLK} l'horloge
+\end{itemize}
+
+Nous avons rencontré passablement de difficultés lors de cette étape. Tout d'abord, nous ne pouvions pas charger notre UART sur la carte, car, à la base, les horloges étaient reliées au compteur 4 bits, de sorte à compter un coup d'horloge chaque 4 coups. Malheuresement, nous avons constaté que, de cette manière, les bascules n'étaient pas synchronisées. Nous avons donc dû modifier nos circuits en conséquence.
+Un autre poblème que nous avons rencontré, est qu'il n'y avait pas des CLEAR partout, donc lorsque l'on choisissait de "reset" la carte, tout n'était pas remis à 0.
+Au final le résultat sur la carte n'était tout de même pas concluant, car trois 0 s'affichent à la fin. Nous n'avons pas trouvé la source de ce problème, même s'il vient probablement d'un compteur. Cependant, les autres bits transmis sont corrects. Sur logisim, l'UART fonctionne correctement.
+
+Indiquez comment vous faites le test (et avec un groupe différent de la simulation). Quelles données choisissez-vous pour faire les essais ?Vous devez faire valider votre circuit en fonctionnement au quiprofesseur ou à l’assistant
 Commentez brièvement votre expérience dans cette étape en mentionnant, par exemple, des éventuelles difficultés à faire fonctionner le circuit ou à configurer la carte, etc.
 Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
 \\
@@ -222,6 +265,10 @@ Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge
 \section {Conclusion}
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Conclusion - Max 1/2 page}
+Ce laboratoire était assez complet et regroupait un peu tout ce que nous avions vu jusqu'à maintenant. Il nous a demandé d'investir un temps assez conséquent, notamment parce que nous avions fait plusieurs erreurs dans les circuits, que nous avons parfois mis du temps à trouver.
+La plus grosse difficulté a été le test sur carte. Lorsque que nous l'avons fait la permière fois en classe, des erreurs dans les circuits nous ont empêché de le réaliser correctement, et nous avons dû effectuer de nombreuses modifications afin de pouvoir passer l'UART sur la carte. Par la suite, nous avons pu le mettre sur carte pour tester, mais le résultat était peu concluant. Comme cela semblait fonctionner sur logisim, ce résultat était assez frustrant.
+En conclusion, la façon dont sont fait nos circuits n'est pas vraiment optimale, et le test sur carte est peu concluant, mais l'ensemble fonctionne et nous avons pu apprendre des erreurs que nous avons commises, et mieux comprendre le fonctionnement des machines d'état. Ce laboratoire était donc enrichissant.
+
 Cette section est libre pour que vous fassiez une analyse critique de votre laboratoire
 Commentez et analysez 
 les résultats, 
