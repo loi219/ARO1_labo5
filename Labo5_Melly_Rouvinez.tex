@@ -250,14 +250,14 @@ Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge
 
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/STAMAC.png}
+    \includegraphics[width=.8\textwidth]{src/STAMAC_V2.png}
     \captionof{figure}{State machine}
     \label{fig:stamac}
 \end{figure}
 
 
 Cette machine d'état prend en entrée le compteur 4 bits, le compteur 8 bits et le bit envoyé par l'émetteur. Les bascules bistables sont de type S-R car il fallait qu'elle ne change pas d'état après être passée à $1$ au flanc montant. Cette machine d'état va renvoyer un $1$ si un $0$ à été transmis comme signal de départ et si 8 coups d'horloges n'ont pas encore été atteints.\\
-La première bascule prend en entrée l'inverse du bit envoyé par l'émetteur (de façon à ce que l'horloge passe à $1$ lorsque le bit envoyé est un $0$). Ainsi, à chaque coup d'horloge, celle de la première bascule va passer à 1, et si l'entrée \textbf{S} de la bascule est à $1$ (et donc le bit envoyé par l'émetteur à $0$), l'état de la bascule va passer à 1 et y rester. Ainsi, on sait que le bit qui signale le départ à été envoyé.\\
+La première bascule prend en entrée le résultat de la porte AND qui renvoie un $1$ si l'inverse du bit envoyé par l'émetteur vaut $1$, et que COUNT\_4BIT\_MAX (de façon à ce que l'horloge passe à $1$ lorsque le bit envoyé est un $0$ et que le nombre de coups d'horloge est un multiple de 4). Ainsi, à chaque coup d'horloge, celle de la première bascule va passer à 1, et si l'entrée \textbf{S} de la bascule est à $1$ (et donc le bit envoyé par l'émetteur à $0$), l'état de la bascule va passer à 1 et y rester. Ainsi, on sait que le bit qui signale le départ à été envoyé.\\
 La deuxième bascule prend en entrée le compteur 8 bits. Ainsi, à chaque coup d'horloge, la bascule va "contrôler" que l'on ait pas atteint la fin du mot. Si l'entrée est à $1$ lorsque le compteur 8 bit annonce la fin du mot, la bascule change d'état et y reste.\\
 Au bout du circuit, une porte XOR permet de savoir si les deux bascules ne sont pas au même état.
 Ainsi, au départ, la sortie est à 0. Dès qu'un zéro est transmis par l'émetteur, la première bascule passe à $1$, et la sortie sera à $1$ également. Puis, dès qu'on atteint les 8 coups d'horloge, la deuxième bascule passe à $1$ aussi, et la sortie passe donc définitivement à $0$.\\
@@ -265,7 +265,7 @@ Enfin, un MUX tout à la fin enverra en sortie la constante $0$ tant que le COUN
 Cette machine d'état est de type 1 parmi N.
 
 Équations de la machine d'état:
-\textbf{Q0+} = NOT(LAST\_BIT)
+\textbf{Q0+} = NOT(LAST\_BIT) AND COUNT\_4BITS\_MAX
 \textbf{Q1+} = COUNT\_8BITS\_MAX
 \textbf{D} = ( (NOT(LAST\_BIT)  XOR COUNT\_8BITS\_MAX ) COUNT\_4BITS\_MAX
 
@@ -279,20 +279,28 @@ Table des états:
     0 & 1 & 0 & 0 & Hold \\ \hline
     0 & 1 & 1 & 0 & Hold \\ \hline
     1 & 0 & 0 & 0 & Hold \\ \hline
-    1 & 0 & 1 & 0 & Hold \\ \hline
+    1 & 0 & 1 & φ & φ \\ \hline
     1 & 1 & 0 & 0 & Hold \\ \hline
     1 & 1 & 1 & 1 & Stop \\ \hline
     \end{tabular}
 \end{center}
 \end{tcolorbox}
-
+À noter que le cas ou l'on aura Q0 valant $0$ et Q1 valant $1$ n'arrivera jamais, puisque c'est le fait que Q0 passe à $1$ qui va déclencher le compteur 8 bits dont va dépendre Q1.
 \begin{figure}[H]
 \centering
     \includegraphics[width=.8\textwidth]{src/stamac2.png}
     \captionof{figure}{States}
     \label{fig:stamac2}
 \end{figure}
-
+Chronogramme de la machine:
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.8\textwidth]{src/CHRONO_STAMAC_4_colorized.png}
+    \captionof{figure}{State machine chrono}
+    \label{fig:stamac}
+\end{figure}
+En rose, c'est l'instant où la première bascule (250,170) passe à $1$. On remarque qu'il s'agit de l'instant où le bit reçu en entrée \textbs{A} passe à $0$, alors qu'on a le COUNT\_4BITS qui vient de signaler 4 coups d'horloge.\\
+Au-dessous, en bleu, la deuxième bascule (250,290) passe à $1$. On remarque qu'à ce moment, on a effectivement la première bascule déjà à $1$, et l'entrée \textbs{COUNT\_8BITS\_MAX} à $1$ aussi (ce qui annonce qu'on a reçu la séquence de 8 bits en entier).
 \section {Intégration et simulation}
 \subsection{Intégration}
 Suivant votre partie à concevoir, vous devez réaliser l’UART en interconnectant les différents blocs. 
@@ -304,7 +312,7 @@ Expliquez le fonctionnement global de l’UART\\
 \begin{figure}[H]
 \centering
     \includegraphics[width=1\textwidth]{src/UART.png}
-    \captionof{figure}{Circuit de base des compteurs}
+    \captionof{figure}{UART}
     \label{fig:countBase}
 \end{figure}
 
@@ -324,8 +332,9 @@ Le bit A va être transmis à un shift register, qui sera activé seulement lors
 Le shift register n'est pas activé d'emblée. Son entrée \textbf{S} reçoit la sortie de la machine d'état, dont l'état passera à l'état "activé" au moment où l'on veut commencer à recevoir les bits, c'est-à-dire quand un $0$ est transmis.
 Lorsqu'un premier $0$ est transmis par l'émetteur, la machine d'état va changer d'état et activer ou non le shift register en lui passant le bit de sortie dans son entrée \textbf{S} (le même bit est donné à \textbf{S0} et \texbf{S1}). La sortie de la machine d'état va être prise en compte chaque 4 coups d'horloge, le reste du temps elle reste à 0. Ainsi, le shift register va être activé uniquement chaque 4 coups d'horloge (comme requis), et ce 8 fois (le temps de recevoir le mot en entier).\\
 Le compteur 4 bits prend un $1$ en entrée \textbf{A} car il doit compter continuellement, puisqu'il faut recevoir un bit de l'émetteur chaque 4 coups d'horloge. Le compteur 8 bits, lui, doit commencer à compter seulemement lorsqu'on doit recevoir les bits de l'émetteur, et doit considerer 4 coups d'horloge comme un seul. Il prend donc en entrée la sortie de la machine d'état, qui aura un $1$ en sortie à chaque 4 coups d'horloge dès l'instant où un 0 est transmis par l'émetteur, donc il va bien compter un bit chaque 4 coups d'horloge. Ainsi, le compteur 8 bits arrivera à 8 lorsqu'il y aura eu 32 coups d'horloge.\\
-Le register de sortie a pour rôle de charger les 8 bits dans une sortie lorsqu'ils ont été transmis. Il prend donc en entrée A la sortie du shift register, qui contiendra les bits reçus. En entrée \textbf{S}, il prend la sortie du compteur 8 bits, ainsi c'est seulement à la fin de la réception des 8 bits que les bits vont être chargé. Le reste du temps, les bits seront conservés (le register est sur "hold").
+Le register de sortie a pour rôle de charger les 8 bits dans une sortie lorsqu'ils ont été transmis. Il prend donc en entrée A la sortie du shift register, qui contiendra les bits reçus. En entrée \textbf{S}, il prend la sortie du compteur 8 bits, ainsi c'est seulement à la fin de la réception des 8 bits que les bits vont être chargé. Le reste du temps, les bits seront conservés (le register est sur "hold").\\
 Ainsi, on a bien une réception de 8 bits loadés dans une sortie après $8*4$ coups d'horloge après le signal donné par un bit à $0$ transmis au début.
+
 
 \end{tcolorbox}
  \subsection{Simulation sous Logisim}
@@ -335,10 +344,19 @@ L’UART réalisé est ensuite testé en simulation sous Logisim.
 Indiquez comment vous simulez votre UART sous Logisim (seul ou avec le générateur fourni), ET avec un UART d’un autre groupe (indiquez quel groupe)
 Insérez un ou plusieurs chronogrammes, annotez-le(s) et expliquez pourquoi le fonctionnement est correct et conforme aux spécifications.
 Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
-Pour simuler l'UART sous logisim, nous avons mis la fréquence de l'horloge sur 2Hz, et nous avons mis l'entrée \textbf{A} à $1$, pour que la transmission ne démarre pas immédiatement. Nous avons aussi ajouté une sortie au shift register, car cela nous permettait de suivre l'avancement des bits au moment de la tranmission.\\
+Pour simuler l'UART sous logisim, nous avons mis la fréquence de l'horloge sur 2Hz, et nous avons mis l'entrée \textbf{A} à $1$, pour que la transmission ne démarre pas immédiatement. Nous avons aussi ajouté une sortie au shift register, car cela nous permettait de suivre l'avancement des bits au moment de la transmission.\\
 Nous avons lancé l'horloge, et après un nombre arbitraire de coups d'horloge, nous avons passé l'entrée \textbf{A} de $1$ à $0$. Nous avons pu constater le début de la tranmission des bits, en variant l'entrée \textbf{A}, et nous avons compté les coups d'horloge pour nous assurer que les compteurs fonctionnaient correctement.
 Nous avons aussi testé chaque circuit indépendamment.
 \\
+\begin{figure}[H]
+\centering
+    \includegraphics[width=1\textwidth]{src/CHRONO_UART_1.png}
+    \captionof{figure}{UART CHRONO}
+    \label{fig:countBase}
+\end{figure}
+Sur le chronogramme ci-dessus, la flèche violette marque le début de la séquence à recevoir. Le compteur 4 bits est à fini de compter 4 bits, et le bit reçu est un $0$. Ainsi, une bascule de la machine d'état est passée à $1$ et la machine d'état renvoie donc elle aussi un $1$ (puisqu'elle est composée de deux bascules avec un XOR). On remarque d'ailleurs que la machine d'état renvoie bien une sortie à $0$ lorsque le compteur 4 bits n'est pas à 3, puisqu'il faut prendre un bit chaque 4 coups d'horloge.\\
+La flèche rouge indique la fin de la réception des bits. On constate qu'il s'agit bien du moment où le compteur 8 bits arrive à 7.
+
 \end{tcolorbox}
  \subsection{Synthèse et test de fonctionnement réel}
 Synthèse et configuration du matériel, test de fonctionnement.
