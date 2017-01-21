@@ -23,6 +23,7 @@
 \usepackage{caption}
 
 
+
 %Définition des couleurs
 \definecolor{havelockBlue}{rgb}{0.004, 0.42, 0.73}
 \definecolor{Monokaimagenta}{rgb}{0.86,0.08,0.24}
@@ -124,13 +125,40 @@ Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge
 \section {Réalisation}
 \subsection{Le bloc shift-register}
 Ce bloc sur 8 bits a 4 modes de fonctionnement. Vous devez le refaire entièrement avec des bascules et des multiplexeurs.
+
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Conception et tests - Max 1 page}
-Insérez une capture d’écran pour présenter votre bloc shift-register. Expliquez brièvement son fonctionnement.
-Indiquez comment vous avez testé les 4 modes de fonctionnement afin de le valider.
-Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
-\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{src/SHREGI_8BITS.png}
+    \captionof{figure}{Bloc SHIFT REGISTER}
+    \label{fig:SHREGI_8}
+\end{figure}
+
+Le shift register 8 bits est composé de 2 shift register 4 bits.  Ils ont comme entrée en commun l'horloge \textbf{CK}, \textbf{CLR} pour la remise à zéro et \textbf{S} qui comprend 4 états: 
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        S  & Action      & $Q+$ & Explications\\
+        \hline
+        00 & Hold        & $Q^+ = Q$   & Reste dans l'état passé \\
+        01 & Load        & $Q^+ = D$   & Charge l'entier de l'entrée \\
+        10 & Shift left  & $Q^+ = <<Q$ & Décale les bits à gauche \\
+        11 & Shift right & $Q^+ = >>Q$ & Décale les bits à droite \\
+        \hline    
+    \end{tabular}    
+\end{center}
+
+Les entrées \textbf{R} et \textbf{L} sont utilisées lors d'un décalage, s'il se fait à droite les chiffres décalés vont être remplacé par des $0$ si \textbf{R} est actif et par des $1$ si \textbf{L} est actif, lors d'un décalage à gauche le schéma est inversé. Dans le cas d'une activation de ces 2 éléments, les chiffres seront remplacés par des $1$\\
+
+Le byte est séparé en deux nibbles qui sont chacun en entrée \textbf{D} des register 4 bits.
+Lorsqu'un décalage est fait, le dernier bit d'un registre doit être récupéré par le suivant, afin de ne pas perdre les bits décalés. Ainsi, pour le décalage à gauche, le bit [0] du shift register prenant en entrée D les bits [7:4] de l'octet (le deuxième SHREGI\footnote{Shift register} de l'illustration), doit être passé en entrée \textbf{R} du premier SHREGI. Ainsi, au moment du décalage à gauche, le bit[0] du deuxième SHREGI va bien être passé au premier SHREGI et il y aura une continuité dans le décalage.
+Le même principe est appliqué pour le décalage à droite, mais cette fois c'est le bit [3] du 1\up{er} SHREGI qui va être donné en entrée \textbf{L} du 2\up{ème} SHREGI.
+\paragraph{Les tests ont été effectués avec un chronogramme (voir \ref{fig:chrono_shregi8}) }. Dans un premier le chronogramme incrémente sa valeur ensuite l'entrée \textbf{S} passe à $01$, ce qui permet de charger les données dans \textbf{D}, ensuite \textbf{S} se met en mode $10$ et les bits se retrouvent décalés vers la droite. Dans un 2\up{ème} temps, \textbf{D} est composé de $0$ donc \textbf{S} charge à nouveau les données et s'active cette fois avec $11$ pour un décalage à droite.
+ 
 \end{tcolorbox}
+
 \subsection{Le bloc compteur 0-3}
 Le premier compteur demandé compte de 0 à 3. Ce compteur comprend une entrée de remise à 0 synchrone et une sortie indiquant que le compteur a atteint sa valeur maximum.
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
@@ -146,23 +174,34 @@ Indiquez comment vous avez testé les différents modes de fonctionnement afin d
 Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
 
 
-Ce bloc est composé d'un bloc de base (voir \ref{fig:countBase}) qui s'occupe uniqument de changer d'étât une bascule D, ce qui aura comme effet de compter lorsque qu'il est connecté avec d'autres de ces blocs.\\
+Ce bloc est composé d'un bloc de base (voir \ref{fig:countBase}) qui s'occupe uniqument de changer l'étât une bascule D, ce qui aura comme effet de "compter" lorsque qu'il est connecté avec d'autres de ces blocs.\\
+Dans notre cas, ce circuit va incérmenter sa valeur jusqu'à arriver à $3$, lorsque qu'il a atteint ce nombre, la sortie \textbf{MAXb} s'activera pour indiquer que le compteur est arrivé à la fin.
+
 \paragraph{Définition des entrées}
 \begin{itemize}
 
-    \item     \textbf{A} active le compteur
-    \item     \textbf{CLK} permet de connecter l'horloge du circuit "maître"
-    \item     \textbf{CLR} permet une remise à zéro du compteur
-
+    \item     \textbf{A} Active le compteur
+    \item     \textbf{CLK} Permet de connecter l'horloge du circuit "maître"
+    \item     \textbf{CLR} Remise à zéro du compteur
 \end{itemize}
 
 \paragraph{Définition des sorties}
 \begin{itemize}
 
-    \item     \textbf{MAX} s'active lorsque que le compteur à atteint sa valeur maximum, c'est-à-dire 3.
-    \item     \textbf{D} affiche l'état du compteur
+    \item     \textbf{MAX} S'active lorsque que le compteur à atteint sa valeur maximum, c'est-à-dire 3.
+    \item     \textbf{D} Affiche l'état du compteur
 \end{itemize}
 
+
+
+\paragraph{Les tests ont été effectués avec le chronogramme ci-dessous}. Lorsque que le compteur atteint la valeur $3$ la sortie \textbf{MAX} est active et le la sortie \textbf{D} incrémente bel et bien sa valeur.
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.8\textwidth]{src/chrono_COUNT_4.png}
+    \captionof{figure}{Compteur 0-3}
+    \label{fig:count4bits}
+\end{figure}
 
 \end{tcolorbox}
 \subsection{Le bloc compteur 0-7}
@@ -172,13 +211,32 @@ Le deuxième compteur demandé compte de 0 à 7. Ce compteur comprend une entré
 Insérez une capture d’écran pour présenter votre bloc compteur 0-7. Expliquez sa réalisation et son fonctionnement. Inutile de reprendre les explications du paragraphe précédent 3.2. Expliquez simplement ce que vous avez dû changer ou rajouter pour passer du compteur 0-3 au compteur 0-7.
 Indiquez comment vous avez testé les différents modes de fonctionnement afin de le valider. Vous pouvez ajouter un chronogramme.
 Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
-\\
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.8\textwidth]{src/COUNT_8BITS.png}
+    \captionof{figure}{Compteur 0\-3}
+    \label{fig:count4bits}
+\end{figure}
+
+Vu que nous avons un circuit de base qui permettrait de créer de créer n compteurs, l'ajout d'n bloc de ce circuit été nécessaire et donc la sortie \textbf{D} et \textbf{MAX} ont aussi été adaptés.
+
+\paragraph{Les tests ont été effectués avec le chronogramme ci-dessous}. Lorsque que le compteur atteint la valeur $7$ la sortie \textbf{MAX} est active et le la sortie \textbf{D} incrémente bel et bien sa valeur.
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.8\textwidth]{src/chrono_COUNT_8.png}
+    \captionof{figure}{Compteur 0-7}
+    \label{fig:count8bits}
+\end{figure}
+
+
+
 \end{tcolorbox}
 \subsection{La machine d’état}
 Cette machine d’état de type 1 parmi M contrôle les deux compteurs et le shift register. 
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Conception Max 3 pages}
-Précisez les entrées et sorties de votre machine d’état
+Précisez les entrées et sorties de votre machine d’état\\
 Cette machine d'état prend en entrée le compteur 4 bits, le compteur 8 bits et le bit envoyé par l'émetteur. Les bascules bistables sont de type S-R car il fallait qu'elle ne change pas d'état après être passée à 1 au flanc montant. Cette machine d'état va renvoyer un 1 si un '0' à été transmis comme signal de départ et si 8 coups d'horloges n'ont pas encore été atteints.
 La première bascule prend en entrée l'inverse du bit envoyé par l'émetteur (de façon à ce que l'horloge passe à 1 lorsuqe le bit envoyé ets un 0) et, en horloge, le compteur 4 bits (puisque les bits de l'émetteur doivent être reçus chaque 4 coups d'horloge). Ainsi, à chaque 4 coups d'horloge, l'horloge de la première bascule va passer à 1, et si l'entrée de S de la bascule est à 1 (et donc le bit envoyé par l'émetteur à 0), l'état de la bascule va passer à 1 et y rester. Ainsi, on sait que le bit qui signale le départ à été envoyé.
 La deuxième bascule prend en entrée le compteur 8 bits, et en horloge le compteur 4 bits. Ainsi, chaque 4 coups d'horloge, la bascule va "contrôler" que l'on n'ait pas atteint la fin du mot. Si l'entrée est à 1 lorsque le compteur 8 bit annonce la fin du mot, la bascule change d'état et y reste.
@@ -187,8 +245,8 @@ Ainsi, au départ, la sortie est à 0. Dès qu'un 0 est transmis par l'émetteur
 
 Insérez un graphe des états et une table des états. Donnez des explications sur le fonctionnement de votre machine. Quel est son Type ?
 Donnez les équations des états futurs et insérez une capture d’écran de la réalisation de votre machine.
-Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
-\\
+Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)\\
+
 \end{tcolorbox}
 \section {Intégration et simulation}
 \subsection{Intégration}
@@ -243,7 +301,22 @@ ETCAETERA…
     \includegraphics[width=.8\textwidth]{src/COUNT_BASE.png}
     \captionof{figure}{Circuit de base des compteurs}
     \label{fig:countBase}
-    \end{figure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.8\textwidth]{src/SHREGI_4BITS.png}
+    \captionof{figure}{SHIFT REGISTER 4BITS}
+    \label{fig:shregi4}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=1\textwidth]{src/chrono_SHREG_8BITS.png}
+    \captionof{figure}{Chronogramme Shift Register 8bits}
+    \label{fig:chrono_shregi8}
+    Note: les premières données FF et 3 ne doivent pas être prises en compte
+\end{figure}
 
 
 \end{document}
