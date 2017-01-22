@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project integrity="f804ea15e0e8c071a3777fc350231a84be38f5ce" source="2.13.20.t" version="1.0">
+<project integrity="039df7cfc5fcce5b1348ab5c5a161b0546573fa3" source="2.13.20.t" version="1.0">
 This file is intended to be loaded by Logisim-evolution (https://github.com/reds-heig/logisim-evolution).
 <lib desc="#Wiring" name="0">
     <tool name="Splitter">
@@ -771,18 +771,19 @@ end TCL_Generic;
     <wire from="(740,270)" to="(790,270)"/>
     <wire from="(260,220)" to="(450,220)"/>
     <wire from="(740,270)" to="(740,410)"/>
-    <wire from="(810,250)" to="(870,250)"/>
     <wire from="(700,270)" to="(700,340)"/>
     <wire from="(560,240)" to="(560,310)"/>
     <wire from="(740,410)" to="(800,410)"/>
     <wire from="(700,270)" to="(740,270)"/>
+    <wire from="(810,230)" to="(850,230)"/>
     <wire from="(430,310)" to="(430,340)"/>
+    <wire from="(790,220)" to="(790,240)"/>
+    <wire from="(790,250)" to="(790,270)"/>
     <wire from="(350,260)" to="(450,260)"/>
     <wire from="(350,380)" to="(450,380)"/>
     <wire from="(770,220)" to="(770,370)"/>
     <wire from="(850,390)" to="(870,390)"/>
     <wire from="(260,330)" to="(350,330)"/>
-    <wire from="(790,220)" to="(790,260)"/>
     <wire from="(560,220)" to="(770,220)"/>
     <wire from="(770,220)" to="(790,220)"/>
     <wire from="(770,370)" to="(800,370)"/>
@@ -803,18 +804,6 @@ end TCL_Generic;
     </comp>
     <comp loc="(560,220)" name="COUNT_BASE">
       <a name="label" val="COUNT_BASE_1"/>
-    </comp>
-    <comp lib="0" loc="(870,250)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-      <a name="width" val="2"/>
-      <a name="label" val="D"/>
-      <a name="labelloc" val="east"/>
-      <a name="owner" val="johanna_melly"/>
-      <a name="date" val="20.12.16 15:03:18"/>
-      <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="295dfe9f-9cec-4fb3-bd00-6735922febfc"/>
-      <a name="integrity" val="4d5153faa74aaa228fdbcc7f0ca0289cc6e9ad28"/>
     </comp>
     <comp lib="0" loc="(870,390)" name="Pin">
       <a name="facing" val="west"/>
@@ -845,7 +834,7 @@ end TCL_Generic;
       <a name="uuid" val="8081c91a-f391-4d54-bc5d-551d598f316c"/>
       <a name="integrity" val="366ebf9010123fd16ed3576731abdd8ea451b61f"/>
     </comp>
-    <comp lib="0" loc="(810,250)" name="Splitter">
+    <comp lib="0" loc="(810,230)" name="Splitter">
       <a name="facing" val="west"/>
       <a name="owner" val="johanna_melly"/>
       <a name="date" val="20.12.16 15:03:04"/>
@@ -860,6 +849,18 @@ end TCL_Generic;
       <a name="version" val="2.13.20.t"/>
       <a name="uuid" val="4f1a8112-2371-43c3-8053-fb103085ce1d"/>
       <a name="integrity" val="f887eee20597c8852656c2f854ac4a48161ae583"/>
+    </comp>
+    <comp lib="0" loc="(850,230)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="width" val="2"/>
+      <a name="label" val="D"/>
+      <a name="labelloc" val="east"/>
+      <a name="owner" val="johanna_melly"/>
+      <a name="date" val="20.12.16 15:03:18"/>
+      <a name="version" val="2.13.20.t"/>
+      <a name="uuid" val="295dfe9f-9cec-4fb3-bd00-6735922febfc"/>
+      <a name="integrity" val="4d5153faa74aaa228fdbcc7f0ca0289cc6e9ad28"/>
     </comp>
     <comp lib="7" loc="(4,50)" name="Text" trackercomp="true">
       <a name="text" val="Attention, votre version de Logisim"/>
@@ -1571,9 +1572,7 @@ end TCL_Generic;
     <wire from="(800,280)" to="(800,290)"/>
     <wire from="(450,310)" to="(500,310)"/>
     <wire from="(210,190)" to="(210,330)"/>
-    <wire from="(350,350)" to="(350,370)"/>
     <wire from="(280,190)" to="(320,190)"/>
-    <wire from="(340,520)" to="(700,520)"/>
     <wire from="(360,410)" to="(400,410)"/>
     <wire from="(380,390)" to="(420,390)"/>
     <wire from="(380,270)" to="(420,270)"/>
@@ -1583,11 +1582,11 @@ end TCL_Generic;
     <wire from="(400,290)" to="(420,290)"/>
     <wire from="(730,130)" to="(730,290)"/>
     <wire from="(700,290)" to="(700,520)"/>
+    <wire from="(150,600)" to="(360,600)"/>
     <wire from="(820,260)" to="(850,260)"/>
     <wire from="(390,210)" to="(390,250)"/>
+    <wire from="(270,370)" to="(420,370)"/>
     <wire from="(310,230)" to="(320,230)"/>
-    <wire from="(340,560)" to="(350,560)"/>
-    <wire from="(270,350)" to="(350,350)"/>
     <wire from="(210,330)" to="(220,330)"/>
     <wire from="(280,130)" to="(730,130)"/>
     <wire from="(150,230)" to="(280,230)"/>
@@ -1597,34 +1596,28 @@ end TCL_Generic;
     <wire from="(550,290)" to="(610,290)"/>
     <wire from="(450,300)" to="(450,310)"/>
     <wire from="(500,310)" to="(500,460)"/>
+    <wire from="(220,330)" to="(220,350)"/>
     <wire from="(550,290)" to="(550,370)"/>
+    <wire from="(150,520)" to="(700,520)"/>
     <wire from="(350,460)" to="(450,460)"/>
     <wire from="(770,250)" to="(790,250)"/>
     <wire from="(700,290)" to="(730,290)"/>
-    <wire from="(340,600)" to="(360,600)"/>
     <wire from="(370,210)" to="(390,210)"/>
     <wire from="(450,420)" to="(450,460)"/>
     <wire from="(730,290)" to="(800,290)"/>
     <wire from="(280,130)" to="(280,190)"/>
-    <wire from="(150,370)" to="(220,370)"/>
+    <wire from="(150,390)" to="(220,390)"/>
     <wire from="(480,250)" to="(610,250)"/>
     <wire from="(210,190)" to="(280,190)"/>
+    <wire from="(150,560)" to="(350,560)"/>
     <wire from="(360,410)" to="(360,600)"/>
-    <wire from="(350,370)" to="(420,370)"/>
-    <comp lib="0" loc="(340,560)" name="Pin">
-      <a name="label" val="CLR"/>
+    <comp lib="0" loc="(150,390)" name="Pin">
+      <a name="label" val="COUNT_8BITS_MAX"/>
       <a name="owner" val="johanna_melly"/>
-      <a name="date" val="02.01.17 15:01:05"/>
+      <a name="date" val="02.01.17 14:58:45"/>
       <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="44b2f1a4-5a86-4a24-824d-b94cd0f309ac"/>
-      <a name="integrity" val="1cbc19c61698f6bdd2a3ae107f014099ece3d169"/>
-    </comp>
-    <comp lib="1" loc="(270,350)" name="AND Gate">
-      <a name="owner" val="johanna_melly"/>
-      <a name="date" val="21.01.17 23:35:17"/>
-      <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="f50cd32e-730c-4ae9-9fde-1aa4f62fbe19"/>
-      <a name="integrity" val="d6bd0687e9c45746d41df25b79e8de6e548f9c0d"/>
+      <a name="uuid" val="5063ee27-9b5c-470c-aaf5-f45a3a138417"/>
+      <a name="integrity" val="78dfeecdc3ca4111372cd0d45f5892f39a6284e1"/>
     </comp>
     <comp lib="4" loc="(430,360)" name="S-R Flip-Flop">
       <a name="trigger" val="falling"/>
@@ -1637,24 +1630,8 @@ end TCL_Generic;
     <comp lib="0" loc="(380,390)" name="Constant">
       <a name="value" val="0x0"/>
     </comp>
-    <comp lib="0" loc="(340,520)" name="Pin">
-      <a name="label" val="COUNT_4BITS_MAX"/>
-      <a name="owner" val="johanna_melly"/>
-      <a name="date" val="02.01.17 15:01:05"/>
-      <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="e4af7ed9-195f-474f-b501-a500b528664a"/>
-      <a name="integrity" val="8f8550ef6030a7bb1b3ca64905ab679d2977d874"/>
-    </comp>
     <comp lib="0" loc="(380,270)" name="Constant">
       <a name="value" val="0x0"/>
-    </comp>
-    <comp lib="0" loc="(340,600)" name="Pin">
-      <a name="label" val="CLK"/>
-      <a name="owner" val="johanna_melly"/>
-      <a name="date" val="02.01.17 15:01:05"/>
-      <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="f7cb983d-ab6b-4536-bdc7-48b471540e7c"/>
-      <a name="integrity" val="b072333e10981f723cc141dee0885e75099479c5"/>
     </comp>
     <comp lib="4" loc="(430,240)" name="S-R Flip-Flop">
       <a name="trigger" val="falling"/>
@@ -1679,12 +1656,35 @@ end TCL_Generic;
       <a name="uuid" val="b7d6ba34-37ca-46e0-8b0b-d416aadc1250"/>
       <a name="integrity" val="54c087277f4fe69cd58a0316f27647a6ed8345bd"/>
     </comp>
+    <comp lib="1" loc="(270,370)" name="AND Gate">
+      <a name="owner" val="johanna_melly"/>
+      <a name="date" val="21.01.17 23:35:17"/>
+      <a name="version" val="2.13.20.t"/>
+      <a name="uuid" val="f50cd32e-730c-4ae9-9fde-1aa4f62fbe19"/>
+      <a name="integrity" val="d6bd0687e9c45746d41df25b79e8de6e548f9c0d"/>
+    </comp>
+    <comp lib="0" loc="(150,600)" name="Pin">
+      <a name="label" val="CLK"/>
+      <a name="owner" val="johanna_melly"/>
+      <a name="date" val="02.01.17 15:01:05"/>
+      <a name="version" val="2.13.20.t"/>
+      <a name="uuid" val="f7cb983d-ab6b-4536-bdc7-48b471540e7c"/>
+      <a name="integrity" val="b072333e10981f723cc141dee0885e75099479c5"/>
+    </comp>
     <comp lib="1" loc="(670,270)" name="XOR Gate">
       <a name="owner" val="johanna_melly"/>
       <a name="date" val="02.01.17 17:43:58"/>
       <a name="version" val="2.13.20.t"/>
       <a name="uuid" val="9e3a9f45-f0ce-40d1-8e58-0f6140d05c58"/>
       <a name="integrity" val="3bb6e5fc6cb51084283240db0c80e3d8ad4556e2"/>
+    </comp>
+    <comp lib="0" loc="(150,560)" name="Pin">
+      <a name="label" val="CLR"/>
+      <a name="owner" val="johanna_melly"/>
+      <a name="date" val="02.01.17 15:01:05"/>
+      <a name="version" val="2.13.20.t"/>
+      <a name="uuid" val="44b2f1a4-5a86-4a24-824d-b94cd0f309ac"/>
+      <a name="integrity" val="1cbc19c61698f6bdd2a3ae107f014099ece3d169"/>
     </comp>
     <comp lib="0" loc="(850,260)" name="Pin">
       <a name="facing" val="west"/>
@@ -1697,13 +1697,13 @@ end TCL_Generic;
       <a name="uuid" val="8ff4682b-0970-4e5f-b23e-c0269ed64bfc"/>
       <a name="integrity" val="a9fa30a4eaac915ef5ddd4be2b65116894bcb25c"/>
     </comp>
-    <comp lib="0" loc="(150,370)" name="Pin">
-      <a name="label" val="COUNT_8BITS_MAX"/>
+    <comp lib="0" loc="(150,520)" name="Pin">
+      <a name="label" val="COUNT_4BITS_MAX"/>
       <a name="owner" val="johanna_melly"/>
-      <a name="date" val="02.01.17 14:58:45"/>
+      <a name="date" val="02.01.17 15:01:05"/>
       <a name="version" val="2.13.20.t"/>
-      <a name="uuid" val="5063ee27-9b5c-470c-aaf5-f45a3a138417"/>
-      <a name="integrity" val="78dfeecdc3ca4111372cd0d45f5892f39a6284e1"/>
+      <a name="uuid" val="e4af7ed9-195f-474f-b501-a500b528664a"/>
+      <a name="integrity" val="8f8550ef6030a7bb1b3ca64905ab679d2977d874"/>
     </comp>
     <comp lib="0" loc="(150,230)" name="Pin">
       <a name="label" val="LAST_BIT"/>
