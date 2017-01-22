@@ -450,13 +450,7 @@ En conclusion, la façon dont sont faits nos circuits n'est pas vraiment optimal
 
 \paragraph{Erreur dans l'UART}
 Nous avons remarqué que le résultat renvoyé en sortie par le registre de sortie était décalé d'un bit vers la gauche, alors que le shift register contenait la bonne séquence de bits. En fait, le registre de sortie charge la séquence au moment où le compteur 8 bit arrive à 7, et donc à l'instant même où sa sortie \textbf{MAX} vaut $1$. Or, il se trouve qu'à ce moment-là, il manque encore un coup d'horologe pour que tous les bits soient dans le shift register. Ainsi, un bit ne sera pas chargé par le registre de sortie.\\
-La figure suivante illustre une solution que nous avons trouvée pour obtenir la bonne séquence de bits en sortie. Il s'agit de modifications faites dans le COUNT\_8BITS. La sortir \textbf{MAX}, dans cette version, renvoie un $1$ non pas à l'instant exact où le compteur atteint 7, mais au flanc descendant du coup d'horloge qui l'a fait passer à 8. Cette solution n'est pas bonne, car un peu «bricolée», et parce qu'en utilisant cette solution, la machine d'état va rester à l'état "load" pendant un coup de trop (ce coup ne serait pas pris en compte en sortie, mais ce ne serait tout de même pas correct). Nou\begin{figure}[H]
-\centering
-    \includegraphics[width=1\textwidth]{src/chrono_SHREG_8BITS.png}
-    \captionof{figure}{Chronogramme Shift Register 8bits}
-    \label{fig:chrono_shregi8}
-    Note: les premières données FF et 3 ne doivent pas être prises en compte
-\end{figure}s avons donc fait le choix de laisser notre circuit avec cette erreur de décalage.\\
+La figure suivante illustre une solution que nous avons trouvée pour obtenir la bonne séquence de bits en sortie. Il s'agit de modifications faites dans le COUNT\_8BITS. La sortie \textbf{MAX}, dans cette version, renvoie un $1$ non pas à l'instant exact où le compteur atteint 7, mais au flanc descendant du coup d'horloge qui la fait passer à 8. Cette solution n'est pas bonne, car un peu «bricolée», et parce qu'en utilisant cette solution, la machine d'état va rester à l'état "load" pendant un coup de trop (ce coup ne serait pas pris en compte en sortie, mais ce ne serait tout de même pas correct). Nous avons donc fait le choix de laisser notre circuit avec cette erreur de décalage.\\
 \begin{figure}[H]
 \centering
     \includegraphics[width=1\textwidth]{src/COUNT_8BITS_corrige.png}
