@@ -354,7 +354,7 @@ Le bit A va être transmis à un shift register, qui sera activé seulement lors
 Le shift register n'est pas activé d'emblée. Son entrée \textbf{S} reçoit la sortie de la machine d'état, dont l'état passera à l'état "activé" au moment où l'on veut commencer à recevoir les bits, c'est-à-dire quand un $0$ est transmis.
 Lorsqu'un premier $0$ est transmis par l'émetteur, la machine d'état va changer d'état et activer ou non le shift register en lui passant le bit de sortie dans son entrée \textbf{S} (le même bit est donné à \textbf{S0} et \textbf{S1}). La sortie de la machine d'état va être prise en compte chaque 4 coups d'horloge, le reste du temps elle reste à 0. Ainsi, le shift register va être activé uniquement chaque 4 coups d'horloge (comme requis), et ce 8 fois (le temps de recevoir le mot en entier).\\
 Le compteur 4 bits prend un $1$ en entrée \textbf{A} car il doit compter continuellement, puisqu'il faut recevoir un bit de l'émetteur chaque 4 coups d'horloge. Le compteur 8 bits, lui, doit commencer à compter seulemement lorsqu'on doit recevoir les bits de l'émetteur, et doit considerer 4 coups d'horloge comme un seul. Il prend donc en entrée la sortie de la machine d'état, qui aura un $1$ en sortie à chaque 4 coups d'horloge dès l'instant où un 0 est transmis par l'émetteur, donc il va bien compter un bit chaque 4 coups d'horloge. Ainsi, le compteur 8 bits arrivera à 8 lorsqu'il y aura eu 32 coups d'horloge.\\
-Le register de sortie a pour rôle de charger les 8 bits dans une sortie lorsqu'ils ont été transmis. Il prend donc en entrée A la sortie du shift register, qui contiendra les bits reçus. En entrée \textbf{S}, il prend la sortie du compteur 8 bits, ainsi c'est seulement à la fin de la réception des 8 bits que les bits vont être chargé. Le reste du temps, les bits seront conservés (le register est sur "hold").\\
+Le register de sortie a pour rôle de charger les 8 bits dans une sortie lorsqu'ils ont été transmis. Il prend donc en entrée A la sortie du shift register, qui contiendra les bits reçus. En entrée \textbf{S}, il prend la sortie du compteur 8 bits, ainsi c'est seulement à la fin de la réception des 8 bits que les bits vont être chargés. Le reste du temps, les bits seront conservés (le register est sur "hold").\\
 Ainsi, on a bien une réception de 8 bits loadés dans une sortie après $8*4$ coups d'horloge après le signal donné par un bit à $0$ transmis au début.
 
 
@@ -364,9 +364,9 @@ Ainsi, on a bien une réception de 8 bits loadés dans une sortie après $8*4$ c
 L’UART réalisé est ensuite testé en simulation sous Logisim.
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Réalisation et simulation Logisim - Max 2 pages}
-Indiquez comment vous simulez votre UART sous Logisim (seul ou avec le générateur fourni), ET avec un UART d’un autre groupe (indiquez quel groupe)
-Insérez un ou plusieurs chronogrammes, annotez-le(s) et expliquez pourquoi le fonctionnement est correct et conforme aux spécifications.
-Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
+%Indiquez comment vous simulez votre UART sous Logisim (seul ou avec le générateur fourni), ET avec un UART d’un autre groupe (indiquez quel groupe)
+%Insérez un ou plusieurs chronogrammes, annotez-le(s) et expliquez pourquoi le fonctionnement est correct et conforme aux spécifications.
+%Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
 Pour simuler l'UART sous logisim, nous avons mis la fréquence de l'horloge sur 2Hz, et nous avons mis l'entrée \textbf{A} à $1$, pour que la transmission ne démarre pas immédiatement. Nous avons aussi ajouté une sortie au shift register, car cela nous permettait de suivre l'avancement des bits au moment de la transmission.\\
 Nous avons lancé l'horloge, et après un nombre arbitraire de coups d'horloge, nous avons passé l'entrée \textbf{A} de $1$ à $0$. Nous avons pu constater le début de la tranmission des bits, en variant l'entrée \textbf{A}, et nous avons compté les coups d'horloge pour nous assurer que les compteurs fonctionnaient correctement.
 Nous avons aussi testé chaque circuit indépendamment.
@@ -377,9 +377,20 @@ Nous avons aussi testé chaque circuit indépendamment.
     \captionof{figure}{UART CHRONO}
     \label{fig:countBase}
 \end{figure}
-Sur le chronogramme ci-dessus, la flèche violette marque le début de la séquence à recevoir. Le compteur 4 bits est à fini de compter 4 bits, et le bit reçu est un $0$. Ainsi, une bascule de la machine d'état est passée à $1$ et la machine d'état renvoie donc elle aussi un $1$ (puisqu'elle est composée de deux bascules avec un XOR). On remarque d'ailleurs que la machine d'état renvoie bien une sortie à $0$ lorsque le compteur 4 bits n'est pas à 3, puisqu'il faut prendre un bit chaque 4 coups d'horloge.\\
-La flèche rouge indique la fin de la réception des bits. On constate qu'il s'agit bien du moment où le compteur 8 bits arrive à 7.
-
+Légende:
+\begin{itemize}
+    \item     \textbf{A} Bit envoyé par l'émetteur
+    \item     \textbf{COUNT\_4BITS/D} Sortie du compteur 4 bits
+    \item     \textbf{COUNT\_8BITS/C} Sortie du compteur 8 bits
+    \item     \textbf{COUNT\_8BITS/MAX} Le compteur 8 bits a atteint 8 bits
+    \item     \textbf{STAMAC/D} Sortie de la machine d'état
+    \item     \textbf{SHREGI\_8BITS/Q} Sortie du shift register
+    \item     \textbf{D} Sortie de l'UART
+\end{itemize}
+Sur le chronogramme ci-dessus, la flèche rouge marque le bit $0$ envoyé par l'émetteur et qui va permettre à la machine d'état de passer à l'état "load" pour le prochain bit (le bit de signal n'est pas pris en compte dans la sortie).\\
+La flèche verte marque le début de la séquence à recevoir. Le compteur 4 bits a fini de compter 4 bit. Une bascule de la machine d'état est passée à $1$ et la machine d'état renvoie donc elle aussi un $1$ (puisqu'elle est composée de deux bascules avec un XOR). On remarque d'ailleurs que la machine d'état renvoie bien une sortie à $0$ lorsque le compteur 4 bits n'est pas à 3, puisqu'il faut prendre un bit chaque 4 coups d'horloge. Le compteur 8 bits démarre à ce moment-là.\\
+Jusqu'à la flèche bleue, il s'agit juste de la réception des bits (on peut suivre l'avancement dans le shift register). À la flèche bleue, on arrive au MAX du compteur 8 bits, et la séquence présente dans le register va être envoyée dans la sortie D. Cependant, comme expliqué en Annexe (voir figure \ref{fig:count8_corr} et le paragraphe qui l'accompagne), la sortie est envoyée un coup d'horloge trop tôt, et il y a donc un décalage de 1 bit sur la gauche. Ainsi, on obtient 0b01110110 au lieu de 0b00111011.\\
+Si, par contre, on regarde plus loin à la flèche orange, on se rend compte que la séquence de bit est bien transmise en entier, et correcte dans le shift register, qui est à 0b00111011.\\
 \end{tcolorbox}
  \subsection{Synthèse et test de fonctionnement réel}
 Synthèse et configuration du matériel, test de fonctionnement.
@@ -452,12 +463,24 @@ En conclusion, la façon dont sont faits nos circuits n'est pas vraiment optimal
     Note: les premières données FF et 3 ne doivent pas être prises en compte
 \end{figure}
 
+
+\paragraph{Erreur dans l'UART}
+Nous avons remarqué que le résultat renvoyé en sortie par le registre de sortie était décalé d'un bit vers la gauche, alors que le shift register contenait la bonne séquence de bits. En fait, le registre de sortie charge la séquence au moment où le compteur 8 bit arrive à 7, et donc à l'instant même où sa sortie \textbf{MAX} vaut $1$. Or, il se trouve qu'à ce moment-là, il manque encore un coup d'horologe pour que tous les bits soient dans le shift register. Ainsi, un bit ne sera pas chargé par le registre de sortie.\\
+La figure suivante illustre une solution que nous avons trouvée pour obtenir la bonne séquence de bits en sortie. Il s'agit de modifications faites dans le COUNT\_8BITS. La sortie \textbf{MAX}, dans cette version, renvoie un $1$ non pas à l'instant exact où le compteur atteint 7, mais au flanc descendant du coup d'horloge qui la fait passer à 8. Cette solution n'est pas bonne, car un peu «bricolée», et parce qu'en utilisant cette solution, la machine d'état va rester à l'état "load" pendant un coup de trop (ce coup ne serait pas pris en compte en sortie, mais ce ne serait tout de même pas correct). Nous avons donc fait le choix de laisser notre circuit avec cette erreur de décalage.\\
+\begin{figure}[H]
+\centering
+    \includegraphics[width=1\textwidth]{src/COUNT_8BITS_corrige.png}
+    \captionof{figure}{Compteur 8 bits corrigé}
+    \label{fig:count8_corr}
+\end{figure}
+
 \begin{figure}[H]
 \centering
     \includegraphics[width=.8\textwidth]{src/CHRONO_STAMAC_4_colorized.png}
     \captionof{figure}{Chronogramme machine d'états}
     \label{fig:chrono_stamac}
 \end{figure}
+
 
 
 \end{document}
