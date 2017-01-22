@@ -18,6 +18,8 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{tikz}
+\usetikzlibrary {positioning,arrows,automata}
 
 
 
@@ -290,22 +292,35 @@ Cette machine d'état est de type 1 parmi N.
     \end{tabular}
 \end{center}
 À noter que le cas ou l'on aura Q0 valant $0$ et Q1 valant $1$ n'arrivera jamais, puisque c'est le fait que Q0 passe à $1$ qui va déclencher le compteur 8 bits dont va dépendre Q1.
-
+\paragraph{Graphe d'états}:
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.2\textwidth]{src/stamac2.png}
-    \captionof{figure}{State machine}
-    \label{fig:stamac}
-\end{figure}
-Chronogramme de la machine:
-\begin{figure}[H]
-\centering
-    \includegraphics[width=.8\textwidth]{src/CHRONO_STAMAC_4_colorized.png}
-    \captionof{figure}{State machine chrono}
-    \label{fig:stamac}
+    \begin {tikzpicture}[-latex ,auto ,node distance=8em ,on grid ,semithick ,state/.style ={ circle ,top color =white ,draw, text=black},every node/.style={scale=0.8}]
+    
+        \node[initial,state] (A) {Hold};
+        \node[state] (B) [below of = A] {Load};
+        \node[state] (C) [below of = B] {Stop};
+        \node[state] (D) [left of = B] {Reset}; 
+        
+          
+        \path (A) edge [loop right] node[right] {$[000,010,011,100,110]/0$} (A);
+        \path (A) edge node {$001/1$} (B);
+        
+        \path (B) edge [loop right] node[right] {$001/1$} (B);
+        \path (B) edge node {$111/1$} (C);
+        
+        \path (D) edge node {$000/0$} (A);
+        
+        \path (C) edge node {$000/0$} (D);
+        \path (B) edge node {$000/0$} (D);
+    \end{tikzpicture}
+\captionof{figure}{Graphe d'états}
+\label{fig:graphe_etat}
 \end{figure}
 
-En rose, c'est l'instant où la première bascule (250,170) passe à $1$. On remarque qu'il s'agit de l'instant où le bit reçu en entrée \textbf{A} passe à $0$, alors qu'on a le COUNT\_4BITS qui vient de signaler 4 coups d'horloge.\\
+
+\paragraph{Les tests ont été validé grâce au chronogramme \ref{fig:chrono_stamac}}
+En rose, c'est l'instant où la première bascule (250,170) passe à $1$. On remarque qu'il s'agit de l'instant où le bit reçu en entrée \textbf{A} passe à $0$, alors que le COUNT\_4BITS vient de signaler 4 coups d'horloge.\\
 Au-dessous, en bleu, la deuxième bascule (250,290) passe à $1$. On remarque qu'à ce moment, on a effectivement la première bascule déjà à $1$, et l'entrée \textbf{COUNT\_8BITS\_MAX} à $1$ aussi (ce qui annonce qu'on a reçu la séquence de 8 bits en entier).
 \end{tcolorbox}
 
@@ -448,6 +463,7 @@ En conclusion, la façon dont sont faits nos circuits n'est pas vraiment optimal
     Note: les premières données FF et 3 ne doivent pas être prises en compte
 \end{figure}
 
+
 \paragraph{Erreur dans l'UART}
 Nous avons remarqué que le résultat renvoyé en sortie par le registre de sortie était décalé d'un bit vers la gauche, alors que le shift register contenait la bonne séquence de bits. En fait, le registre de sortie charge la séquence au moment où le compteur 8 bit arrive à 7, et donc à l'instant même où sa sortie \textbf{MAX} vaut $1$. Or, il se trouve qu'à ce moment-là, il manque encore un coup d'horologe pour que tous les bits soient dans le shift register. Ainsi, un bit ne sera pas chargé par le registre de sortie.\\
 La figure suivante illustre une solution que nous avons trouvée pour obtenir la bonne séquence de bits en sortie. Il s'agit de modifications faites dans le COUNT\_8BITS. La sortie \textbf{MAX}, dans cette version, renvoie un $1$ non pas à l'instant exact où le compteur atteint 7, mais au flanc descendant du coup d'horloge qui la fait passer à 8. Cette solution n'est pas bonne, car un peu «bricolée», et parce qu'en utilisant cette solution, la machine d'état va rester à l'état "load" pendant un coup de trop (ce coup ne serait pas pris en compte en sortie, mais ce ne serait tout de même pas correct). Nous avons donc fait le choix de laisser notre circuit avec cette erreur de décalage.\\
@@ -457,5 +473,14 @@ La figure suivante illustre une solution que nous avons trouvée pour obtenir la
     \captionof{figure}{Compteur 8 bits corrigé}
     \label{fig:count8_corr}
 \end{figure}
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.8\textwidth]{src/CHRONO_STAMAC_4_colorized.png}
+    \captionof{figure}{Chronogramme machine d'états}
+    \label{fig:chrono_stamac}
+\end{figure}
+
+
 
 \end{document}
