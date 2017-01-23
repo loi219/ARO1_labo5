@@ -19,6 +19,10 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{tikz}
+\usepackage[top=15mm,bottom=20mm,right=50mm,left=50mm]{geometry} 
+\usepackage[export]{adjustbox}
+
+
 \usetikzlibrary {positioning,arrows,automata}
 
 
@@ -112,8 +116,6 @@ Le début de la communication démarre lorsque que le contrôle reçoit un $0$.
 \section{Architecture}
 
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
-\paragraph{Architecture - Max 1/2 page}
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\textwidth]{src/schema_bloc.png}
@@ -126,6 +128,7 @@ Quand le compteur 0-7 aura atteint sa valeur maximum, il va envoyer un signal 0b
 
 \end{tcolorbox}
 
+\pagebreak
 \section {Réalisation}
 \subsection{Le bloc shift-register}
 Ce bloc sur 8 bits a 4 modes de fonctionnement. Vous devez le refaire entièrement avec des bascules et des multiplexeurs.
@@ -203,6 +206,7 @@ Dans notre cas, ce circuit va incrémenter sa valeur jusqu'à arriver à $3$, lo
 \end{figure}
 
 \end{tcolorbox}
+\pagebreak
 \subsection{Le bloc compteur 0-7}
 Le deuxième compteur demandé compte de 0 à 7. Ce compteur comprend une entrée de remise à 0 synchrone, une entrée enable pour l’activer et une sortie indiquant que le compteur a atteint sa valeur maximum.
 
@@ -226,7 +230,7 @@ Vu que nous avons un circuit de base qui permettrait de créer n compteurs, l'aj
 \end{figure}
 
 \end{tcolorbox}
-
+\pagebreak
 
 \subsection{La machine d’état}
 Cette machine d’état de type 1 parmi M contrôle les deux compteurs et le shift register.
@@ -306,15 +310,15 @@ Cette machine d'état est de type 1 parmi N.
 En rose, c'est l'instant où la première bascule (250,170) passe à $1$. On remarque qu'il s'agit de l'instant où le bit reçu en entrée \textbf{A} passe à $0$, alors que le COUNT\_4BITS vient de signaler 4 coups d'horloge.\\
 Au-dessous, en bleu, la deuxième bascule (250,290) passe à $1$. On remarque qu'à ce moment, on a effectivement la première bascule déjà à $1$, et l'entrée \textbf{COUNT\_8BITS\_MAX} à $1$ aussi (ce qui annonce qu'on a reçu la séquence de 8 bits en entier).
 \end{tcolorbox}
+\pagebreak
 
 \section {Intégration et simulation}
-
 \subsection{Intégration}
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/UART.png}
-    \captionof{figure}{UART}
+    \includegraphics[width=.9\textwidth]{src/UART.png}
+    \captionof{figure}{UART (Ici: \nameref{fig:uartPLus})}
     \label{fig:uart}
 \end{figure}
 
@@ -342,7 +346,7 @@ réception de 8 bits chargés dans une sortie après $8*4$ coups d'horloge aprè
  \subsection{Simulation sous Logisim}
 L’UART réalisé est ensuite testé en simulation sous Logisim.
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
-\paragraph{Réalisation et simulation Logisim - Max 2 pages}
+
 %Indiquez comment vous simulez votre UART sous Logisim (seul ou avec le générateur fourni), ET avec un UART d’un autre groupe (indiquez quel groupe)
 %Insérez un ou plusieurs chronogrammes, annotez-le(s) et expliquez pourquoi le fonctionnement est correct et conforme aux spécifications.
 %Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
@@ -383,6 +387,7 @@ Cependant, il y a une erreur dans la sortie/textbf{D} de notre UART, que nous n'
 Pour le test sur Logisim avec un émetteur et un récepteur, nous avons créé un projet sur Logisim contenant l'émetteur du groupe de Samuel Mayor et David Jaquet et notre récepteur.\\
 Nous avons tout d'abord eu des difficultés à recevoir la séquence transmise, car la manières dont nous détections le START BIT n'étais pas adaptée. Nous avons corrigé notre UART et le transfert était concluant. Cependant, nous rencontrons le même problème que lorsque nous avons réalisé les tests avec uniquement notre UART, c'est-à-dire que le bit de poids faible est erroné en sortie.
 \end{tcolorbox}
+\pagebreak
  \subsection{Synthèse et test de fonctionnement réel}
 Synthèse et configuration du matériel, test de fonctionnement.
 L’UART finalement synthétisé et chargé dans une carte, une carte émetteur sera reliée à une carte récepteur afin de tester une transmission de données.
@@ -405,7 +410,6 @@ Après cela, nous avons retesté notre circuit sur carte, avec l'émetteur de M.
 \end{tcolorbox}
 \section {Conclusion}
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
-\paragraph{Conclusion - Max 1/2 page}
 Ce laboratoire était assez complet et regroupait globalement ce que nous avions vu jusqu'à maintenant. Il nous a demandé d'investir un temps assez conséquent, notamment parce que nous avions fait plusieurs erreurs dans les circuits, que nous avons parfois mis du temps à trouver.\\
 La plus grosse difficulté a été le test sur carte. Lorsque que nous l'avons fait la première fois en classe, des erreurs dans les circuits nous ont empêché de le réaliser correctement, et nous avons dû effectuer de nombreuses modifications afin de pouvoir passer l'UART sur la carte. Par la suite, nous avons pu le mettre sur carte pour tester, mais le résultat était peu concluant. Comme cela semblait fonctionner sur logisim, ce résultat était assez frustrant.\\
 Nous avons aussi pris un certain temps pour réaliser l'UART, à laquelle il manquait, au début, le bloc register, et lier tous les circuits déjà faits entre eux. De plus, nous pensions pouvoir mettre en entrée des horloges les compteurs 4 et 8 bits, ce qui n'était, en réalité, pas faisable. Nous avons donc dû trouver un moyen de rendre les horloges dépendantes des compteurs sans toutefois les y connecter, ce qui a été une difficulé aussi.\\
@@ -426,14 +430,14 @@ En conclusion, la façon dont sont faits nos circuits n'est pas vraiment optimal
 
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/COUNT_BASE.png}
+    \includegraphics[width=1\textwidth]{src/COUNT_BASE.png}
     \captionof{figure}{Circuit de base des compteurs}
     \label{fig:countBase}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/SHREGI_4BITS.png}
+    \includegraphics[width=1\textwidth]{src/SHREGI_4BITS.png}
     \captionof{figure}{SHIFT REGISTER 4BITS}
     \label{fig:shregi4}
 \end{figure}
@@ -449,24 +453,32 @@ En conclusion, la façon dont sont faits nos circuits n'est pas vraiment optimal
 
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/CHRONO_STAMAC_4_colorized.png}
+    \includegraphics[width=1\textwidth]{src/CHRONO_STAMAC_4_colorized.png}
     \captionof{figure}{Chronogramme machine d'états}
     \label{fig:chrono_stamac}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/REGI_8BITS}
+    \includegraphics[width=1\textwidth]{src/REGI_8BITS}
     \captionof{figure}{Register 8 bits}
     \label{fig:regi8bits}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/START_BIT.png}
+    \includegraphics[width=1\textwidth]{src/START_BIT.png}
     \captionof{figure}{Bloc Start bit}
     \label{fig:startbit}
 \end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=1.5\textwidth]{src/UART.png}
+    \captionof{figure}{plus grand}
+    \label{fig:uartPLus}
+    
+\end{figure}
+
 
 
 \end{document}
