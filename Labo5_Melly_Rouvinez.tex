@@ -354,7 +354,7 @@ Nous avons aussi testé chaque circuit indépendamment.
 \centering
     \includegraphics[width=1\textwidth]{src/CHRONO_UART_OK.png}
     \captionof{figure}{Chrono de l'UART}
-    \label{fig:countBase}
+    \label{fig:chronoUART}
 \end{figure}
 Légende:
 \begin{itemize}
@@ -366,20 +366,21 @@ Légende:
     \item     \textbf{STAMAC/D}: Sortie de la machine d'état
     \item     \textbf{D}: Sortie de l'UART
 \end{itemize}
-Nous avons tout d'abord réalisé un teste avec uniquement notre UART.\\
-La séquence envoyée est 0b11111111. Sur ce chronogramme, on peut observer que le bit START passe à $1$ au début du comptage de 4 bits (voir le compteur 4 bits sur le chrono) suivant le passage de l'entrée A de $1$ à $0$ sur 2 coups d'horloge et non pas sur 4. À noter que le fait qu'il passe à 1 seulement au début du compteur 4 bits va causer une erreur sur la sortie (voir plus bas).
+Nous avons tout d'abord réalisé un test seulement notre UART.\\
+La séquence envoyée est 0b11111111. Sur ce chronogramme, on peut observer que le bit START passe à $1$ au début du comptage de 4 bits (voir le compteur 4 bits sur le chronogramme) suivant le passage de l'entrée A de $1$ à $0$ sur 2 coups d'horloge et non pas sur 4. À noter que le fait qu'il passe à 1 seulement au début du compteur 4 bits va causer une erreur sur la sortie (voir plus bas).
 Le start bit fait donc passer la state machine de "hold" à "load", qui va envoyer des $1$ en sortie à chaque coup d'horloge. Elle est reliée au compteur 8 bits, qui s'active donc à ce moment-là aussi. Dès lors, on peut voir que la machine d'état va renvoyer 8 fois un $1$, le temps des 8 coups d'horloge. Lorsque les 8 coups d'horloge ( $8*4$ ) ont été comptés, la sortie \textbf{MAX} du compteur 8 bits passe à $1$, ce qui a pour effet de faire passer la machine d'état à "stop", et de permettre au registre de sortie de charger les 8 bits reçus.
 \end{tcolorbox}
+
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 
-Cependant, il y a une erreur dans la sortie D de notre UART, que nous n'avons pas pu corriger. Le bit de poids faible de la sortie est à 0, peu importe le bit qui a été envoyé, car la sortie du shift register est chargée trop tôt.\\
+Cependant, il y a une erreur dans la sortie/textbf{D} de notre UART, que nous n'avons pas pu corriger. Le bit de poids faible de la sortie est à 0, peu importe le bit qui a été envoyé, car la sortie du shift register est chargée trop tôt.\\
 \begin{figure}[H]
 \centering
     \includegraphics[width=1\textwidth]{src/CHRONO_EMISSION.png}
     \captionof{figure}{Chrono avec émetteur}
     \label{fig:chrono_emetteur}
 \end{figure}
-Pour le test sur Logisim avec un émetteur et un récepteur, nous avons créé un projet sur Logisim contenant l'émetteur d'un autre groupe et notre récepteur.\\
+Pour le test sur Logisim avec un émetteur et un récepteur, nous avons créé un projet sur Logisim contenant l'émetteur du groupe de Samuel Mayor et David Jaquet et notre récepteur.\\
 Nous avons tout d'abord eu des difficultés à recevoir la séquence transmise, car la manières dont nous détections le START BIT n'étais pas adaptée. Nous avons corrigé notre UART et le transfert était concluant. Cependant, nous rencontrons le même problème que lorsque nous avons réalisé les tests avec uniquement notre UART, c'est-à-dire que le bit de poids faible est erroné en sortie.
 \end{tcolorbox}
  \subsection{Synthèse et test de fonctionnement réel}
@@ -399,14 +400,14 @@ Nous avons dû télécharger notre UART sur la carte, et brancher les deux carte
 Nous avons rencontré passablement de difficultés lors de cette étape. Tout d'abord, nous ne pouvions pas charger notre UART sur la carte, car, à la base, les horloges étaient reliées au compteur 4 bits, de sorte à compter un coup d'horloge chaque 4 coups. Malheureusement, nous avons constaté que, de cette manière, les bascules n'étaient pas synchronisées. Nous avons donc dû modifier nos circuits en conséquence.\\
 Un autre problème que nous avons rencontré, est qu'il n'y avait pas de moyen de mise à zéro sur tous nos circuits, donc lorsque l'on choisissait de remettre la carte à zéro, tout n'était pas remis à son état initial.\\
 Nous avons aussi fait l'erreur d'essayer de mettre une horloge dans chaque circuit contenu dans l'UART, mais nous avons rapidement corrigé cela pour remettre une horloge principale et de simples pin dans les circuits.\\
-Après cela, nous avons retesté notre circuit sur carte, avec comme l'émetteur de M.Matthey. Au final, le résultat sur la carte n'était tout de même pas concluant, car trois $0$ s'affichent à la fin, indépendamment de la série de bits envoyés. Nous n'avons pas trouvé la source de ce problème, même s'il vient probablement d'un compteur. Cependant, les autres bits transmis sont corrects. Sur logisim, l'UART fonctionne correctement.
+Après cela, nous avons retesté notre circuit sur carte, avec l'émetteur de M.Matthey. Au final, le résultat n'était tout de même pas concluant, car trois $0$ s'affichent à la fin, indépendamment de la série de bits envoyés. Nous n'avons pas trouvé la source de ce problème, même s'il vient probablement d'un compteur. Cependant, les autres bits transmis sont corrects. Sur logisim, l'UART fonctionne correctement.
 
 \end{tcolorbox}
 \section {Conclusion}
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Conclusion - Max 1/2 page}
 Ce laboratoire était assez complet et regroupait globalement ce que nous avions vu jusqu'à maintenant. Il nous a demandé d'investir un temps assez conséquent, notamment parce que nous avions fait plusieurs erreurs dans les circuits, que nous avons parfois mis du temps à trouver.\\
-La plus grosse difficulté a été le test sur carte. Lorsque que nous l'avons fait la permière fois en classe, des erreurs dans les circuits nous ont empêché de le réaliser correctement, et nous avons dû effectuer de nombreuses modifications afin de pouvoir passer l'UART sur la carte. Par la suite, nous avons pu le mettre sur carte pour tester, mais le résultat était peu concluant. Comme cela semblait fonctionner sur logisim, ce résultat était assez frustrant.\\
+La plus grosse difficulté a été le test sur carte. Lorsque que nous l'avons fait la première fois en classe, des erreurs dans les circuits nous ont empêché de le réaliser correctement, et nous avons dû effectuer de nombreuses modifications afin de pouvoir passer l'UART sur la carte. Par la suite, nous avons pu le mettre sur carte pour tester, mais le résultat était peu concluant. Comme cela semblait fonctionner sur logisim, ce résultat était assez frustrant.\\
 Nous avons aussi pris un certain temps pour réaliser l'UART, à laquelle il manquait, au début, le bloc register, et lier tous les circuits déjà faits entre eux. De plus, nous pensions pouvoir mettre en entrée des horloges les compteurs 4 et 8 bits, ce qui n'était, en réalité, pas faisable. Nous avons donc dû trouver un moyen de rendre les horloges dépendantes des compteurs sans toutefois les y connecter, ce qui a été une difficulé aussi.\\
 En conclusion, la façon dont sont faits nos circuits n'est pas vraiment optimale, et le test sur carte est peu concluant, mais l'ensemble fonctionne et nous avons pu apprendre des erreurs que nous avons commises, et mieux comprendre le fonctionnement des machines d'état. Ce laboratoire était donc enrichissant.
 
