@@ -113,9 +113,6 @@ Le début de la communication démarre lorsque que le contrôle reçoit un $0$.
 
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \paragraph{Architecture - Max 1/2 page}
-Dessinez le schéma bloc complet de votre circuit. Ce circuit contient entre autre : shift-register, compteurs et machine d’état, avec les bus de données et les signaux de contrôle. Vous pouvez faire ce schéma bloc à la main (très proprement), ou en utilisant Logisim (mais avec le nom des signaux), ou avec un outil de dessin de votre choix.
-
-Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)\\
 
 \begin{figure}[H]
     \centering
@@ -172,7 +169,7 @@ Le premier compteur demandé compte de 0 à 3. Ce compteur comprend une entrée 
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/COUNT_4BITS.png}
+    \includegraphics[width=1\textwidth]{src/COUNT_4BITS.png}
     \captionof{figure}{Compteur 0\-3}
     \label{fig:count4bits}
 \end{figure}
@@ -200,7 +197,7 @@ Dans notre cas, ce circuit va incrémenter sa valeur jusqu'à arriver à $3$, lo
 
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/chrono_COUNT_4.png}
+    \includegraphics[width=1\textwidth]{src/chrono_COUNT_4.png}
     \captionof{figure}{Compteur 0-3}
     \label{fig:count4bits}
 \end{figure}
@@ -208,11 +205,12 @@ Dans notre cas, ce circuit va incrémenter sa valeur jusqu'à arriver à $3$, lo
 \end{tcolorbox}
 \subsection{Le bloc compteur 0-7}
 Le deuxième compteur demandé compte de 0 à 7. Ce compteur comprend une entrée de remise à 0 synchrone, une entrée enable pour l’activer et une sortie indiquant que le compteur a atteint sa valeur maximum.
+
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
-\paragraph{Conception et tests - Max 1 page}
+
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/COUNT_8BITS.png}
+    \includegraphics[width=1\textwidth]{src/COUNT_8BITS.png}
     \captionof{figure}{Compteur 0\-3}
     \label{fig:count4bits}
 \end{figure}
@@ -222,26 +220,21 @@ Vu que nous avons un circuit de base qui permettrait de créer n compteurs, l'aj
 \paragraph{Les tests ont été effectués avec le chronogramme ci-dessous}. Lorsque que le compteur atteint la valeur $7$ la sortie \textbf{MAX} est active et le la sortie \textbf{D} incrémente bel et bien sa valeur.
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/chrono_COUNT_8.png}
+    \includegraphics[width=1\textwidth]{src/chrono_COUNT_8.png}
     \captionof{figure}{Compteur 0-7}
     \label{fig:count8bits}
 \end{figure}
 
-
-
 \end{tcolorbox}
 
+
 \subsection{La machine d’état}
-Cette machine d’état de type 1 parmi M contrôle les deux compteurs et le shift register. 
+Cette machine d’état de type 1 parmi M contrôle les deux compteurs et le shift register.
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
-\paragraph{Conception Max 3 pages}
-Insérez un graphe des états et une table des états. Donnez des explications sur le fonctionnement de votre machine. Quel est son Type ?
-Donnez les équations des états futurs et insérez une capture d’écran de la réalisation de votre machine.
-Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)\\
 
 \begin{figure}[H]
 \centering
-    \includegraphics[width=.8\textwidth]{src/STAMAC.png}
+    \includegraphics[width=1\textwidth]{src/STAMAC.png}
     \captionof{figure}{State machine}
     \label{fig:stamac}
 \end{figure}
@@ -315,37 +308,33 @@ Au-dessous, en bleu, la deuxième bascule (250,290) passe à $1$. On remarque qu
 \end{tcolorbox}
 
 \section {Intégration et simulation}
+
 \subsection{Intégration}
-Suivant votre partie à concevoir, vous devez réaliser l’UART en interconnectant les différents blocs.
-
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
-\paragraph{Réalisation et simulation Logisim - Max 1 page}
-
 \begin{figure}[H]
 \centering
-    \includegraphics[width=0.9\textwidth]{src/UART.png}
+    \includegraphics[width=.8\textwidth]{src/UART.png}
     \captionof{figure}{UART}
-    \label{fig:countBase}
+    \label{fig:uart}
 \end{figure}
 
-L'UART est composé d'un compteur 4 bits(voir \ref{fig:count4bits}), d'un compteur 8 bits(voir \ref{fig:count8bits}), d'une machine d'état (voir \ref{fig:stamac}), d'un shift reister 8 bits (voir \ref{fig:SHREGI_8}) ainsi qu'un register de sortie 8 bits (voir \ref{fig:SHREGI_8}).\\    
+L'UART est composé d'un compteur 4 bits(voir \ref{fig:count4bits}), d'un compteur 8 bits(voir \ref{fig:count8bits}), d'une machine d'état (voir \ref{fig:stamac}), d'un shift register 8 bits (voir \ref{fig:SHREGI_8}) ainsi qu'un register de sortie 8 bits (voir \ref{fig:regi8bits}).\\
 Les différentes entrées de l'UART sont:
 \begin{itemize}
-    \item     \textbf{A} Bit envoyé par l'émetteur
-    \item     \textbf{CLR} Remise à zéro du compteur
-    \item     \textbf{sysclk} Horloge principale, reliée à tous les circuits
+    \item     \textbf{A}: Bit envoyé par l'émetteur
+    \item     \textbf{CLR}: Remise à zéro du compteur
+    \item     \textbf{sysclk}: Horloge principale, reliée à tous les circuits
 \end{itemize}
 En sortie:
 \begin{itemize}
-    \item     \textbf{D} Affiche la sortie du registre, donc la séquence de 8 bits transmise, après $8*4$ coups d'horloge.
+    \item     \textbf{D}: Affiche la sortie du registre, donc la séquence de 8 bits transmise, après $8*4$ coups d'horloge.
 \end{itemize}
-Le fonctionnement global de la machine d'état est le suivant:
 Le bit A va être transmis à un shift register, qui sera activé seulement lorsque la machine d'état lui transmettra un $1$. Cette machine d'état passer à l'état "activé" lorsque elle reçoit un 0. Les bits sont reçus chaque 4 coups d'horloge, et on doit compter 8 bits à partir du début de la transmission, d'où les compteurs 4 et 8 bits. Enfin, un registre load les 8 bits reçus.\\
 Le shift register n'est pas activé d'emblée. Son entrée \textbf{S} reçoit la sortie de la machine d'état, dont l'état passera à l'état "activé" au moment où l'on veut commencer à recevoir les bits, c'est-à-dire quand un $0$ est transmis.\\
-Pour provoquer le changement d'état de la machine d'état de "hold" à "load", un bloc START\_BIT va détecter lorsque l'émetteur envoie un bit $0$ sur 2 coups d'horloge. La machine d'état va alors changer d'état et activer ou non le shift register en lui passant le bit de sortie dans son entrée \textbf{S} (le même bit est donné à \textbf{S0} et \textbf{S1}). La sortie de la machine d'état va être prise en compte chaque 4 coups d'horloge, le reste du temps elle reste à 0. Ainsi, le shift register va être activé uniquement chaque 4 coups d'horloge (comme requis), et ce 8 fois (le temps de recevoir le mot en entier).\\
-Le compteur 4 bits prend un $1$ en entrée \textbf{A} car il doit compter continuellement, puisqu'il faut recevoir un bit de l'émetteur chaque 4 coups d'horloge. Le compteur 8 bits, lui, doit commencer à compter seulemement lorsqu'on doit recevoir les bits de l'émetteur, et doit considerer 4 coups d'horloge comme un seul. Il prend donc en entrée la sortie de la machine d'état, qui aura un $1$ en sortie à chaque 4 coups d'horloge dès l'instant où un 0 est transmis par l'émetteur, donc il va bien compter un bit chaque 4 coups d'horloge. Ainsi, le compteur 8 bits arrivera à 8 lorsqu'il y aura eu 32 coups d'horloge.\\
+Pour provoquer le changement d'état de la machine d'état de "hold" à "load", un bloc START\_BIT (voir \ref{fig:startbit}) va détecter lorsque l'émetteur envoie un bit $0$ sur 2 coups d'horloge. La machine d'état va alors changer d'état et activer ou non le shift register en lui passant le bit de sortie dans son entrée \textbf{S} (le même bit est donné à \textbf{S0} et \textbf{S1}). La sortie de la machine d'état va être prise en compte chaque 4 coups d'horloge, le reste du temps elle reste à 0. Ainsi, le shift register va être activé uniquement chaque 4 coups d'horloge (comme requis), et ce 8 fois (le temps de recevoir le mot en entier).\\
+Le compteur 4 bits prend un $1$ en entrée \textbf{A} car il doit compter continuellement, puisqu'il faut recevoir un bit de l'émetteur chaque 4 coups d'horloge. Le compteur 8 bits, lui, doit commencer à compter seulemement lorsque les bits de l'émetteur sont reçus, et doit considérer 4 coups d'horloge comme un seul. Il prend donc en entrée la sortie de la machine d'état, qui aura un $1$ en sortie à chaque 4 coups d'horloge dès l'instant où un 0 est transmis par l'émetteur, donc il va bien compter un bit chaque 4 coups d'horloge. Ainsi, le compteur 8 bits arrivera à 8 lorsqu'il y aura eu 32 coups d'horloge.\\
 Le register de sortie a pour rôle de charger les 8 bits dans une sortie lorsqu'ils ont été transmis. Il prend donc en entrée A la sortie du shift register, qui contiendra les bits reçus. En entrée \textbf{S}, il prend la sortie du compteur 8 bits, ainsi c'est seulement à la fin de la réception des 8 bits que les bits vont être chargés. Le reste du temps, les bits seront conservés (le register est sur "hold").\\
-Ainsi, on a bien une réception de 8 bits loadés dans une sortie après $8*4$ coups d'horloge après le signal donné par un bit à $0$ transmis au début.
+réception de 8 bits chargés dans une sortie après $8*4$ coups d'horloge après le signal donné par un bit à $0$ transmis au début.
 
 
 \end{tcolorbox}
@@ -357,7 +346,7 @@ L’UART réalisé est ensuite testé en simulation sous Logisim.
 %Indiquez comment vous simulez votre UART sous Logisim (seul ou avec le générateur fourni), ET avec un UART d’un autre groupe (indiquez quel groupe)
 %Insérez un ou plusieurs chronogrammes, annotez-le(s) et expliquez pourquoi le fonctionnement est correct et conforme aux spécifications.
 %Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)
-Pour simuler l'UART sous logisim, nous avons mis la fréquence de l'horloge sur 2Hz, et nous avons mis l'entrée \textbf{A} à $1$, pour que la transmission ne démarre pas immédiatement. Nous avons aussi ajouté une sortie au shift register, car cela nous permettait de suivre l'avancement des bits au moment de la transmission.\\
+Pour simuler l'UART sous logisim, nous avons mis la fréquence de l'horloge sur 2Hz. Nous avons aussi ajouté une sortie au shift register, car cela nous permettait de suivre l'avancement des bits au moment de la transmission.\\
 Nous avons lancé l'horloge, et après un nombre arbitraire de coups d'horloge, nous avons passé l'entrée \textbf{A} de $1$ à $0$. Nous avons pu constater le début de la tranmission des bits, en variant l'entrée \textbf{A}, et nous avons compté les coups d'horloge pour nous assurer que les compteurs fonctionnaient correctement.
 Nous avons aussi testé chaque circuit indépendamment.
 \\
@@ -369,13 +358,13 @@ Nous avons aussi testé chaque circuit indépendamment.
 \end{figure}
 Légende:
 \begin{itemize}
-    \item     \textbf{A} Bit envoyé par l'émetteur
-    \item     \textbf{COUNT\_4BITS/D} Sortie du compteur 4 bits
-    \item     \textbf{COUNT\_8BITS/C} Sortie du compteur 8 bits
-    \item     \textbf{COUNT\_8BITS/MAX} 8 bits ont été comptés
-    \item     \textbf{START\_BIT/START} Début de la réception
-    \item     \textbf{STAMAC/D} Sortie de la machine d'étatquell
-    \item     \textbf{D} Sortie de l'UART
+    \item     \textbf{A}: Bit envoyé par l'émetteur
+    \item     \textbf{COUNT\_4BITS/D}: Sortie du compteur 4 bits
+    \item     \textbf{COUNT\_8BITS/C}: Sortie du compteur 8 bits
+    \item     \textbf{COUNT\_8BITS/MAX}. 8 bits ont été comptés
+    \item     \textbf{START\_BIT/START}: Début de la réception
+    \item     \textbf{STAMAC/D}: Sortie de la machine d'état
+    \item     \textbf{D}: Sortie de l'UART
 \end{itemize}
 Nous avons tout d'abord réalisé un teste avec uniquement notre UART.\\
 La séquence envoyée est 0b11111111. Sur ce chronogramme, on peut observer que le bit START passe à $1$ au début du comptage de 4 bits (voir le compteur 4 bits sur le chrono) suivant le passage de l'entrée A de $1$ à $0$ sur 2 coups d'horloge et non pas sur 4. À noter que le fait qu'il passe à 1 seulement au début du compteur 4 bits va causer une erreur sur la sortie (voir plus bas).
@@ -396,15 +385,7 @@ Nous avons tout d'abord eu des difficultés à recevoir la séquence transmise, 
  \subsection{Synthèse et test de fonctionnement réel}
 Synthèse et configuration du matériel, test de fonctionnement.
 L’UART finalement synthétisé et chargé dans une carte, une carte émetteur sera reliée à une carte récepteur afin de tester une transmission de données.
-
-
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
-
-Indiquez comment vous faites le test (et avec un groupe différent de la simulation). Quelles données choisissez-vous pour faire les essais ?Vous devez faire valider votre circuit en fonctionnement au quiprofesseur ou à l’assistant
-Commentez brièvement votre expérience dans cette étape en mentionnant, par exemple, des éventuelles difficultés à faire fonctionner le circuit ou à configurer la carte, etc.
-Remplacez le texte ci-dessus par vos réponses (à l’intérieur du cadre rouge)\\
-
-\paragraph{Essais avec une carte - Max 1 page}
 Pour l'essai avec la carte, nous avons pris une fréquence à 32Hz, et nous avons téléchargé l'UART sur la carte avec les données suivantes:
 \begin{itemize}
     \item     \textbf{A} les 8 bits transmis par l'émetteur
@@ -472,6 +453,19 @@ En conclusion, la façon dont sont faits nos circuits n'est pas vraiment optimal
     \label{fig:chrono_stamac}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.8\textwidth]{src/REGI_8BITS}
+    \captionof{figure}{Register 8 bits}
+    \label{fig:regi8bits}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=.8\textwidth]{src/START_BIT.png}
+    \captionof{figure}{Bloc Start bit}
+    \label{fig:startbit}
+\end{figure}
 
 
 \end{document}
