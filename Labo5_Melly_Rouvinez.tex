@@ -353,7 +353,7 @@ Nous avons aussi testé chaque circuit indépendamment.
 \begin{figure}[H]
 \centering
     \includegraphics[width=1\textwidth]{src/CHRONO_UART_OK.png}
-    \captionof{figure}{UART CHRONO}
+    \captionof{figure}{Chrono de l'UART}
     \label{fig:countBase}
 \end{figure}
 Légende:
@@ -366,16 +366,25 @@ Légende:
     \item     \textbf{STAMAC/D}: Sortie de la machine d'état
     \item     \textbf{D}: Sortie de l'UART
 \end{itemize}
+Nous avons tout d'abord réalisé un teste avec uniquement notre UART.\\
 La séquence envoyée est 0b11111111. Sur ce chronogramme, on peut observer que le bit START passe à $1$ au début du comptage de 4 bits (voir le compteur 4 bits sur le chrono) suivant le passage de l'entrée A de $1$ à $0$ sur 2 coups d'horloge et non pas sur 4. À noter que le fait qu'il passe à 1 seulement au début du compteur 4 bits va causer une erreur sur la sortie (voir plus bas).
-Le start bit fait donc passer la state machine de "hold" à "load", qui va envoyer des 1 en sortie à chaque coup d'horloge. Elle est reliée au compteur 8 bits, qui s'active donc à ce moment-là aussi. Dès lors, on peut voir que la machine d'état va renvoyer 8 fois un $1$, le temps des 8 coups d'horloge. Lorsque les 8 coups d'horloge ( $8*4$ ) ont été comptés, alors la sortie MAX du compteur 8 bits passe à $1$, ce qui a pour effet de faire passer la machine d'état à "stop". On remarque que le bit de poids faible de la sortie est à 0, car lorsque le start bit attend le début du compteur 4 bits pour envoyer un 1, ainsi la machine d'état s'active trop tard.
+Le start bit fait donc passer la state machine de "hold" à "load", qui va envoyer des $1$ en sortie à chaque coup d'horloge. Elle est reliée au compteur 8 bits, qui s'active donc à ce moment-là aussi. Dès lors, on peut voir que la machine d'état va renvoyer 8 fois un $1$, le temps des 8 coups d'horloge. Lorsque les 8 coups d'horloge ( $8*4$ ) ont été comptés, la sortie \textbf{MAX} du compteur 8 bits passe à $1$, ce qui a pour effet de faire passer la machine d'état à "stop", et de permettre au registre de sortie de charger les 8 bits reçus.
+\end{tcolorbox}
+\begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 
+Cependant, il y a une erreur dans la sortie D de notre UART, que nous n'avons pas pu corriger. Le bit de poids faible de la sortie est à 0, peu importe le bit qui a été envoyé, car la sortie du shift register est chargée trop tôt.\\
+\begin{figure}[H]
+\centering
+    \includegraphics[width=1\textwidth]{src/CHRONO_EMISSION.png}
+    \captionof{figure}{Chrono avec émetteur}
+    \label{fig:chrono_emetteur}
+\end{figure}
+Pour le test sur Logisim avec un émetteur et un récepteur, nous avons créé un projet sur Logisim contenant l'émetteur d'un autre groupe et notre récepteur.\\
+Nous avons tout d'abord eu des difficultés à recevoir la séquence transmise, car la manières dont nous détections le START BIT n'étais pas adaptée. Nous avons corrigé notre UART et le transfert était concluant. Cependant, nous rencontrons le même problème que lorsque nous avons réalisé les tests avec uniquement notre UART, c'est-à-dire que le bit de poids faible est erroné en sortie.
 \end{tcolorbox}
  \subsection{Synthèse et test de fonctionnement réel}
 Synthèse et configuration du matériel, test de fonctionnement.
-L’UART finalement synthétisé et chargé dans une carte, une carte émetteur sera reliée à une carte récepteur afin de tester une transmission de données.\\
-\textbf{COUNT\_8BITS/MAX} Début de la réception
-
-
+L’UART finalement synthétisé et chargé dans une carte, une carte émetteur sera reliée à une carte récepteur afin de tester une transmission de données.
 \begin{tcolorbox}[colframe=Monokaimagenta,colback=white]
 Pour l'essai avec la carte, nous avons pris une fréquence à 32Hz, et nous avons téléchargé l'UART sur la carte avec les données suivantes:
 \begin{itemize}
@@ -384,11 +393,11 @@ Pour l'essai avec la carte, nous avons pris une fréquence à 32Hz, et nous avon
     \item     \textbf{CLK} l'horloge
 \end{itemize}
 
-La carte est branchée à l'ordinateur, ainsi qu'à une console. Le test se faisait avec un autre groupe, qui avait du faire un émetteur. L'objectif était donc que ce groupe émette une série de bits que nous puissions recevoir.
-Les 8 bits de la donnée reçue ont été connectés aux 8 LED de la console, pour pouvoir contrôler la bonne récpection des bits tranmis par l'émetteur. L'entrée "reset" a été connectée au bouton \textbf{SW8}. L'entrée A, qui reçoit 1 à 1 les bits transmis, a été connectée au pin \textbf{MEZ1}. Le fil reliant les deux cartes (celle du groupe émetteur et la notre) se trouvait sur ce connecteur \textbf{MEZ1}.\\
+La carte est branchée à l'ordinateur, ainsi qu'à une console. Le test se faisait avec un autre groupe, qui avait dû faire un émetteur. L'objectif était donc que ce groupe émettre une série de bits que nous puissions recevoir.
+Les 8 bits de la donnée reçue ont été connectés aux 8 LED de la console, pour pouvoir contrôler la bonne réception des bits tranmis par l'émetteur. L'entrée "reset" a été connectée au bouton \textbf{SW8}. L'entrée A, qui reçoit 1 à 1 les bits transmis, a été connectée au pin \textbf{MEZ1}. Le fil reliant les deux cartes (celle du groupe émetteur et la notre) se trouvait sur ce connecteur \textbf{MEZ1}.\\
 Nous avons dû télécharger notre UART sur la carte, et brancher les deux cartes ensemble.
 Nous avons rencontré passablement de difficultés lors de cette étape. Tout d'abord, nous ne pouvions pas charger notre UART sur la carte, car, à la base, les horloges étaient reliées au compteur 4 bits, de sorte à compter un coup d'horloge chaque 4 coups. Malheureusement, nous avons constaté que, de cette manière, les bascules n'étaient pas synchronisées. Nous avons donc dû modifier nos circuits en conséquence.\\
-Un autre poblème que nous avons rencontré, est qu'il n'y avait pas de moyen de mise à zéro sur tous nos circuits, donc lorsque l'on choisissait de remettre la carte à zéro, tout n'était pas remis à son état initial.\\
+Un autre problème que nous avons rencontré, est qu'il n'y avait pas de moyen de mise à zéro sur tous nos circuits, donc lorsque l'on choisissait de remettre la carte à zéro, tout n'était pas remis à son état initial.\\
 Nous avons aussi fait l'erreur d'essayer de mettre une horloge dans chaque circuit contenu dans l'UART, mais nous avons rapidement corrigé cela pour remettre une horloge principale et de simples pin dans les circuits.\\
 Après cela, nous avons retesté notre circuit sur carte, avec comme l'émetteur de M.Matthey. Au final, le résultat sur la carte n'était tout de même pas concluant, car trois $0$ s'affichent à la fin, indépendamment de la série de bits envoyés. Nous n'avons pas trouvé la source de ce problème, même s'il vient probablement d'un compteur. Cependant, les autres bits transmis sont corrects. Sur logisim, l'UART fonctionne correctement.
 
